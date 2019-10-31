@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:OpenHospital.Resourses">
+    <Style TargetType="Rectangle" >
+        <Setter Property="Fill" >
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF5BE274" Offset="1"/>
+                    <GradientStop Color="#FFB8FDEA"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter  >
+    </Style>
+    <Style TargetType="Label" >
+            <Setter Property="FontFamily" Value="Segoe UI Black"/>
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="Black" />
+        </Style>
+        <ControlTemplate TargetType="Button" x:Key="hexagon">
+            <Border Background="Transparent"                          
+                            BorderThickness="1">
+                <Path Stretch="Uniform" Stroke="Transparent" Fill="Transparent" Data="M8.660254,0 L17.320508,5 17.320508,15 8.660254,20 0,15 0,5 8.660254,0 Z" />
+            </Border>
+        </ControlTemplate>
+
+</ResourceDictionary>
