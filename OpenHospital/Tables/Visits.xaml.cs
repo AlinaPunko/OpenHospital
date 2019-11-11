@@ -46,6 +46,7 @@ namespace OpenHospital.Tables
         }
         private void buttonAdd_Click(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show("Пиу");
             //var editConsultationForm = new EditConsultationForm(0);
             //editConsultationForm.ShowDialog();
             //this.Presenter.LoadConsultationsByCriterias();

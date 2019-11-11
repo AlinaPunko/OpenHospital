@@ -25,16 +25,16 @@ namespace OpenHospital
         public MainWindow()
         {
             InitializeComponent();
-            //UserName.Text = Membership.CurrentUser.UserName.ToString();
-            ////Time.Content = DateTime.Now.TimeOfDay;
-            //if (Membership.CurrentUser.RoleID == 2)
-            //{
-            //    ItemDoctors.Visibility = Visibility.Collapsed;
-            //    ItemAddDoctor.Visibility = Visibility.Collapsed;
-            //    ItemAddAdmin.Visibility = Visibility.Collapsed;
-            //    ItemAddPatient.Visibility = Visibility.Collapsed;
-            //    Doctorshex.Visibility = Visibility.Collapsed;
-            //}
+            UserName.Text = Membership.CurrentUser.Login.ToString();
+            //Time.Content = DateTime.Now.TimeOfDay;
+            if (Membership.CurrentUser.RoleID == 2)
+            {
+                ItemDoctors.Visibility = Visibility.Collapsed;
+                ItemAddDoctor.Visibility = Visibility.Collapsed;
+                ItemAddAdmin.Visibility = Visibility.Collapsed;
+                ItemAddPatient.Visibility = Visibility.Collapsed;
+                Doctorshex.Visibility = Visibility.Collapsed;
+            }
 
         }
 

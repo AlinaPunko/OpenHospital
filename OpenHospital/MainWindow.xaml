@@ -30,12 +30,14 @@
         </EventTrigger>
     </Window.Triggers>
     <Grid Background="#FFDEDEDE">
-        <Grid x:Name="GridMain" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="380" Width="870"/>
+        <Grid x:Name="GridMain" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="395" Width="870"/>
         <Image Source="Resourses/Pic4.jpg"/>
         <Button Name="AddPatienthex" Template="{StaticResource hexagon}" Margin="675,180,155,190" Height="Auto" Background="Transparent" Click="AddPatient" />
         <Button Name="Doctorshex" Template="{StaticResource hexagon}" Margin="745,305,85,65" Height="Auto" Background="Transparent" Click="Doctors" />
         <Button Name="AddConsultationhex" Template="{StaticResource hexagon}" Margin="600,60,230,310" Height="Auto" Background="Transparent" Click="AddConsultation" />
         <Button Name="AddVisithex"  Template="{StaticResource hexagon}" Margin="780,245,50,125" Height="Auto" Background="Transparent" Click="AddVisit" />
+        <Label Name="GetTime" HorizontalContentAlignment="Center" Foreground="AliceBlue" HorizontalAlignment="Left" Height="45" Margin="355,235,0,0"  VerticalAlignment="Top" Width="125" FontSize="30" />
+        <Label Name="GetDate" HorizontalContentAlignment="Center" Foreground="AliceBlue" HorizontalAlignment="Left" Height="50" Margin="325,300,0,0"  VerticalAlignment="Top" Width="180"  FontSize="26"/>
         <Grid Height="40" VerticalAlignment="Top" Background="#FF5C99D6">
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="1" ShadowDepth="1" Color="#FFACACAC"/>
@@ -53,6 +55,8 @@
             </StackPanel>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Добро пожаловать</TextBlock>
         </Grid>
+
+        <ContentControl Name="Content" Margin="40,40,0,0"></ContentControl>
         <Grid x:Name="GridMenu" Width="40" HorizontalAlignment="Left" >
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -87,7 +91,7 @@
                             <TextBlock Text="Визиты" ToolTip="Визиты" VerticalAlignment="Center" Margin="5 10" Foreground="Blue"/>
                         </StackPanel>
                     </ListViewItem>
-                    
+
                     <ListViewItem x:Name="ItemDoctors" Height="50" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Doctor" ToolTip="Доктора" Height="25" Width="25" Foreground="Blue"/>
@@ -115,9 +119,7 @@
                 </ListView>
             </StackPanel>
         </Grid>
-        <ContentControl Name="Content" Margin="40,40,0,0"></ContentControl>
-        <Label Name="GetTime" HorizontalContentAlignment="Center" Foreground="AliceBlue" HorizontalAlignment="Left" Height="45" Margin="355,235,0,0"  VerticalAlignment="Top" Width="125" FontSize="30" />
-        <Label Name="GetDate" HorizontalContentAlignment="Center" Foreground="AliceBlue" HorizontalAlignment="Left" Height="50" Margin="325,300,0,0"  VerticalAlignment="Top" Width="180"  FontSize="26"/>
+        
         <!--<t:Visits Margin="40,40,0,0"></t:Visits>-->
     </Grid>
 </Window> 

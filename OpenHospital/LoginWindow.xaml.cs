@@ -16,7 +16,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Linq;
 
 namespace OpenHospital
 {
@@ -29,7 +28,6 @@ namespace OpenHospital
         public LoginWindow()
         {
             InitializeComponent();
-            this.setConnection();
         }
         private void CommandBinding1_Executed(object sender, ExecutedRoutedEventArgs e)
         {
@@ -44,19 +42,6 @@ namespace OpenHospital
         {
             TryLogin();
         }
-        private void setConnection()
-        {
-            String ConnectionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
-            con = new OracleConnection(ConnectionString);
-            try
-            {
-                con.Open();               
-            }
-            catch (Exception exp)
-            {
-                MessageBox.Show(exp.Message);
-            }
-        }
         private void TryLogin()
         {
             string username = UserName.Text;
@@ -65,11 +50,9 @@ namespace OpenHospital
             string loginResultMessage = string.Empty;
             if (TryLogin(username, password, out loginResultMessage))
             {
-                MessageBox.Show("Success");
-                
-                //MainWindow a = new MainWindow();
-                //a.Show();
-                //this.Close();
+                MainWindow a = new MainWindow();
+                a.Show();
+                this.Close();
             }
             else
             {
@@ -86,40 +69,23 @@ namespace OpenHospital
 
             this.Close();
         }
-        public static string GetHashString(string s)
-        {
-            //переводим строку в байт-массим  
-            byte[] bytes = Encoding.Unicode.GetBytes(s);
-
-            //создаем объект для получения средст шифрования  
-            MD5CryptoServiceProvider CSP = new MD5CryptoServiceProvider();
-
-            //вычисляем хеш-представление в байтах  
-            byte[] byteHash = CSP.ComputeHash(bytes);
-
-            string hash = string.Empty;
-
-            //формируем одну цельную строку из массива  
-            foreach (byte b in byteHash)
-                hash += string.Format("{0:x2}", b);
-
-            return hash;
-        }
+        
         private bool TryLogin(string username, string password, out string message)
         {
-            
-            //dataReader.Close();
-            message = "Ошибка при входе. Обратитесь к администратору!";
-            OracleCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT * from Users";
-            cmd.CommandType = CommandType.Text;
-            OracleDataAdapter oracleDataAdapter = new OracleDataAdapter(cmd.CommandText, con);
-            OracleDataReader dataReader = cmd.ExecuteReader();
-            DataTable dt = new DataTable();
-            dt.Load(dataReader);
-            var User = from myrow in dt.AsEnumerable() where (string)myrow["Login"] == username select myrow;
-            //    return false;
-            //}
+            message = string.Empty;
+            bool isLoginDetailsValid = Membership.IsValidLoginDetails(username, password);
+            if (isLoginDetailsValid == false)
+            {
+                message = "Неверное имя или пароль!";
+                return false;
+            }
+
+            bool isLoginSuccessfull = Membership.ValidateAndLogin(username, password);
+            if (isLoginSuccessfull == false)
+            {
+                message = "Ошибка при входе. Обратитесь к администратору!";
+                return false;
+            }
 
             return true;
         }

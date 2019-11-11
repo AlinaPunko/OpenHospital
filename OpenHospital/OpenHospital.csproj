@@ -78,6 +78,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\UsersDataAccess.cs" />
     <Compile Include="EditDoctor.xaml.cs">
       <DependentUpon>EditDoctor.xaml</DependentUpon>
     </Compile>
@@ -87,6 +88,11 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Membership.cs" />
+    <Compile Include="Model\Doctor.cs" />
+    <Compile Include="Model\Patient.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="Model\Visit.cs" />
     <Compile Include="Tables\Doctors.xaml.cs">
       <DependentUpon>Doctors.xaml</DependentUpon>
     </Compile>

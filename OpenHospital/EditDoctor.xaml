@@ -8,9 +8,9 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local1="clr-namespace:OpenHospital"
         mc:Ignorable="d"
-        Title="Доктор" Height="450" MouseDown="EditDoctorForm_MouseDown" Width="350" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+        Title="Доктор" Height="450" Width="350" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
 
-    <Grid>
+    <!--<Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="35"/>
             <ColumnDefinition Width="285"/>
@@ -50,5 +50,5 @@
         <Button x:Name="ButtonClose" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}" Click="buttonCancel_Click"  Grid.Column="2"  Foreground="Black" Height="Auto">
             <materialDesign:PackIcon Kind="Power"  Foreground="Black"/>
         </Button>
-    </Grid>
+    </Grid>-->
 </Window>

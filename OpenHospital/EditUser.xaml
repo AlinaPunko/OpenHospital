@@ -1,4 +1,4 @@
-﻿<Window x:Class="OpenHospita.EditUser"
+﻿<Window x:Class="OpenHospital.EditUser"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,9 +7,9 @@
         xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Пользователь" Height="450" MouseDown="EditUserForm_MouseDown" Width="350" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" Background="Transparent" WindowStartupLocation="CenterScreen" >
+        Title="Пользователь" Height="450"  Width="350" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" Background="Transparent" WindowStartupLocation="CenterScreen" >
 
-    <Grid>
+    <!--<Grid>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="35"/>
@@ -52,6 +52,6 @@
             <materialDesign:PackIcon Kind="Power"  Foreground="Black"/>
         </Button>
 
-    </Grid>
+    </Grid>-->
 
 </Window>

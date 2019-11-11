@@ -1,25 +1,66 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27703.2047
+VisualStudioVersion = 15.0.28307.902
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenHospital", "OpenHospital\OpenHospital.csproj", "{C6A5E76E-5BCD-41C0-ACA0-EA8BA5ACD020}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "C:\Users\Alina\source\repos\WpfApp1\WpfApp1\WpfApp1.csproj", "{8E22A7D6-6D53-4D03-AFFB-524B8EB770B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		q|Any CPU = q|Any CPU
+		q|x64 = q|x64
+		q|x86 = q|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C6A5E76E-5BCD-41C0-ACA0-EA8BA5ACD020}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C6A5E76E-5BCD-41C0-ACA0-EA8BA5ACD020}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6A5E76E-5BCD-41C0-ACA0-EA8BA5ACD020}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C6A5E76E-5BCD-41C0-ACA0-EA8BA5ACD020}.Debug|x64.Build.0 = Debug|Any CPU
+		{C6A5E76E-5BCD-41C0-ACA0-EA8BA5ACD020}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C6A5E76E-5BCD-41C0-ACA0-EA8BA5ACD020}.Debug|x86.Build.0 = Debug|Any CPU
+		{C6A5E76E-5BCD-41C0-ACA0-EA8BA5ACD020}.q|Any CPU.ActiveCfg = Release|Any CPU
+		{C6A5E76E-5BCD-41C0-ACA0-EA8BA5ACD020}.q|Any CPU.Build.0 = Release|Any CPU
+		{C6A5E76E-5BCD-41C0-ACA0-EA8BA5ACD020}.q|x64.ActiveCfg = Release|Any CPU
+		{C6A5E76E-5BCD-41C0-ACA0-EA8BA5ACD020}.q|x64.Build.0 = Release|Any CPU
+		{C6A5E76E-5BCD-41C0-ACA0-EA8BA5ACD020}.q|x86.ActiveCfg = Release|Any CPU
+		{C6A5E76E-5BCD-41C0-ACA0-EA8BA5ACD020}.q|x86.Build.0 = Release|Any CPU
 		{C6A5E76E-5BCD-41C0-ACA0-EA8BA5ACD020}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6A5E76E-5BCD-41C0-ACA0-EA8BA5ACD020}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6A5E76E-5BCD-41C0-ACA0-EA8BA5ACD020}.Release|x64.ActiveCfg = Release|Any CPU
+		{C6A5E76E-5BCD-41C0-ACA0-EA8BA5ACD020}.Release|x64.Build.0 = Release|Any CPU
+		{C6A5E76E-5BCD-41C0-ACA0-EA8BA5ACD020}.Release|x86.ActiveCfg = Release|Any CPU
+		{C6A5E76E-5BCD-41C0-ACA0-EA8BA5ACD020}.Release|x86.Build.0 = Release|Any CPU
+		{8E22A7D6-6D53-4D03-AFFB-524B8EB770B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E22A7D6-6D53-4D03-AFFB-524B8EB770B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E22A7D6-6D53-4D03-AFFB-524B8EB770B2}.Debug|x64.ActiveCfg = Debug|x64
+		{8E22A7D6-6D53-4D03-AFFB-524B8EB770B2}.Debug|x64.Build.0 = Debug|x64
+		{8E22A7D6-6D53-4D03-AFFB-524B8EB770B2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8E22A7D6-6D53-4D03-AFFB-524B8EB770B2}.Debug|x86.Build.0 = Debug|Any CPU
+		{8E22A7D6-6D53-4D03-AFFB-524B8EB770B2}.q|Any CPU.ActiveCfg = q|Any CPU
+		{8E22A7D6-6D53-4D03-AFFB-524B8EB770B2}.q|Any CPU.Build.0 = q|Any CPU
+		{8E22A7D6-6D53-4D03-AFFB-524B8EB770B2}.q|x64.ActiveCfg = q|x64
+		{8E22A7D6-6D53-4D03-AFFB-524B8EB770B2}.q|x64.Build.0 = q|x64
+		{8E22A7D6-6D53-4D03-AFFB-524B8EB770B2}.q|x86.ActiveCfg = q|Any CPU
+		{8E22A7D6-6D53-4D03-AFFB-524B8EB770B2}.q|x86.Build.0 = q|Any CPU
+		{8E22A7D6-6D53-4D03-AFFB-524B8EB770B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E22A7D6-6D53-4D03-AFFB-524B8EB770B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E22A7D6-6D53-4D03-AFFB-524B8EB770B2}.Release|x64.ActiveCfg = Release|x64
+		{8E22A7D6-6D53-4D03-AFFB-524B8EB770B2}.Release|x64.Build.0 = Release|x64
+		{8E22A7D6-6D53-4D03-AFFB-524B8EB770B2}.Release|x86.ActiveCfg = Debug|Any CPU
+		{8E22A7D6-6D53-4D03-AFFB-524B8EB770B2}.Release|x86.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {F71DFC68-C535-4B12-8447-8A0B6F795944}
+		SolutionGuid = {F5C6DB17-1133-4410-A363-F8F72583058A}
 	EndGlobalSection
 EndGlobal
