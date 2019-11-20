@@ -2,10 +2,12 @@
 using OpenHospital.Model;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace OpenHospital
 {
@@ -93,11 +95,35 @@ namespace OpenHospital
         /// <param name="user"></param>
         public static void LogInUser(User user)
         {
-            if (user == null)
+            CurrentUser = user ?? throw new ArgumentNullException("пользователь не должен иметь значение null!");
+            if (user.RoleID == 2)
             {
-                throw new ArgumentNullException("пользователь не должен иметь значение null!");
+                try
+                {
+                    App.con.Close();
+                    App.con.ConnectionString = ConfigurationManager.ConnectionStrings["Doctor"].ConnectionString;
+                    App.con.Open();
+                    //MessageBox.Show("Open");
+                }
+                catch (Exception exp)
+                {
+                    MessageBox.Show(exp.Message);
+                }
             }
-            Membership.CurrentUser = user;
+            else if (user.RoleID == 3)
+            {
+                try
+                {
+                    App.con.Close();
+                    App.con.ConnectionString = ConfigurationManager.ConnectionStrings["Patient"].ConnectionString;
+                    App.con.Open();
+                    //MessageBox.Show("Open");
+                }
+                catch (Exception exp)
+                {
+                    MessageBox.Show(exp.Message);
+                }
+            }
         }
 
         /// <summary>

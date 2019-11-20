@@ -10,7 +10,7 @@
         mc:Ignorable="d"
         Title="Доктор" Height="450" Width="350" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
 
-    <!--<Grid>
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="35"/>
             <ColumnDefinition Width="285"/>
@@ -39,16 +39,15 @@
         <materialDesign:PackIcon Kind="SecurityHome" VerticalAlignment="Center" Foreground="Blue" Margin="4,74,0,46" Grid.Column="1" Grid.Row="4" Height="24" Width="25" RenderTransformOrigin="0.419,0.8"/>
         <TextBox x:Name="textBoxAddress" BorderBrush="Blue" TextWrapping="Wrap"  materialDesign:HintAssist.Hint="Адрес" Foreground="Black" Grid.Column="1" Grid.Row="4" Margin="35,68,0,38" />
         <materialDesign:PackIcon Kind="School" VerticalAlignment="Center" Foreground="Blue" Margin="4,112,0,6" Grid.Column="1" Grid.Row="4" Height="26" Width="25"/>
-        <ComboBox x:Name="textBoxSkills" BorderBrush="Blue" materialDesign:HintAssist.Hint="Категория" Foreground="Black" Grid.Column="1" Grid.Row="4" Margin="35,106,0,0"/>
-        <ComboBox x:Name="textBoxSpec" BorderBrush="Blue" materialDesign:HintAssist.Hint="Специализация" Foreground="Black" Grid.Column="1" Grid.Row="5" Margin="36,5,34,5" Grid.ColumnSpan="2"/>
+        <ComboBox x:Name="textBoxCat" BorderBrush="Blue" materialDesign:HintAssist.Hint="Категория" Foreground="Black" Grid.Column="1" Grid.Row="4" Margin="35,106,0,0"/>
+        <TextBox x:Name="textBoxSpec" BorderBrush="Blue" materialDesign:HintAssist.Hint="Специализация" Foreground="Black" Grid.Column="1" Grid.Row="5" Margin="36,5,34,5" Grid.ColumnSpan="2"/>
         <materialDesign:PackIcon Kind="Doctor" VerticalAlignment="Center" Foreground="Blue" Margin="4,5,0,7" Grid.Column="1" Grid.Row="5" Height="26" Width="25" RenderTransformOrigin="0.44,1.808"/>
         <WrapPanel Grid.Column="1"  Grid.Row="6">
             <Button x:Name="buttonSave" Content="Сохранить" ToolTip="Записать"  FontSize="18" Width="140" BorderBrush="#FF307CD6"  Click="buttonSave_Click" Height="38" />
             <Button x:Name="buttonClose" Content="Отмена" ToolTip="Отменить и выйти" Style="{StaticResource MaterialDesignFlatButton}" Width="140" Height="30" FontFamily="Segoe UI Black"   FontSize="18" Foreground="Black"   Click="buttonClose_Click" />
         </WrapPanel>
-        <Label x:Name="labelMessage" Content="" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="201" Grid.Column="1" Grid.Row="5" Margin="36,12,0,0" />
         <Button x:Name="ButtonClose" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}" Click="buttonCancel_Click"  Grid.Column="2"  Foreground="Black" Height="Auto">
             <materialDesign:PackIcon Kind="Power"  Foreground="Black"/>
         </Button>
-    </Grid>-->
+    </Grid>
 </Window>

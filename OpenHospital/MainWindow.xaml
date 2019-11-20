@@ -56,7 +56,7 @@
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Добро пожаловать</TextBlock>
         </Grid>
 
-        <ContentControl Name="Content" Margin="40,40,0,0"></ContentControl>
+        <ContentControl Name="ContentC" Margin="40,40,0,0"></ContentControl>
         <Grid x:Name="GridMenu" Width="40" HorizontalAlignment="Left" >
             <Grid.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -100,8 +100,8 @@
                     </ListViewItem>
                     <ListViewItem x:Name="ItemAddDoctor" Height="50" >
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="PersonAdd" ToolTip="Добавить пользователя" Height="25" Width="25" Foreground="Blue"/>
-                            <TextBlock Text="Добавить  пользователя" VerticalAlignment="Center"  Margin="5 10" Foreground="Blue"/>
+                            <materialDesign:PackIcon Kind="PersonAdd" ToolTip="Добавить доктора" Height="25" Width="25" Foreground="Blue"/>
+                            <TextBlock Text="Добавить  доктора" VerticalAlignment="Center"  Margin="5 10" Foreground="Blue"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem x:Name="ItemAddAdmin" Height="50" >
@@ -114,6 +114,12 @@
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Person" ToolTip="Добавить пациента" Height="25" Width="25" Foreground="Blue"/>
                             <TextBlock Text="Добавить пациента" VerticalAlignment="Center"  Margin="5 10" Foreground="Blue"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem x:Name="Statistics" Height="40" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="InfoCircle" ToolTip="Доктора" Height="25" Width="25" Foreground="Blue"/>
+                            <TextBlock Text="Статистика" VerticalAlignment="Center"  Margin="5 10" Foreground="Blue"/>
                         </StackPanel>
                     </ListViewItem>
                 </ListView>

@@ -71,7 +71,7 @@
                 Width="35" />
             </Button>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Margin="10,256,363,10" Grid.Row="1" Grid.RowSpan="2">
+        <StackPanel Name="panelChooseButtons" Orientation="Horizontal" Grid.ColumnSpan="2" Margin="10,256,363,10" Grid.Row="1" Grid.RowSpan="2">
             <Button x:Name="buttonChoose" Content="Выбрать" FontSize="15" FontWeight="Bold" Width="150" Height="40" 
                     Click="buttonChoose_Click"  ToolTip="Выбрать доктора" Margin="0,14,0,13"/>
             <Button x:Name="buttonCancel" Style="{StaticResource MaterialDesignFlatButton}" Content="Отменить" FontSize="15"

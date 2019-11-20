@@ -50,6 +50,7 @@ namespace OpenHospital
             string loginResultMessage = string.Empty;
             if (TryLogin(username, password, out loginResultMessage))
             {
+
                 MainWindow a = new MainWindow();
                 a.Show();
                 this.Close();
@@ -73,17 +74,17 @@ namespace OpenHospital
         private bool TryLogin(string username, string password, out string message)
         {
             message = string.Empty;
-            bool isLoginDetailsValid = Membership.IsValidLoginDetails(username, password);
-            if (isLoginDetailsValid == false)
-            {
-                message = "Неверное имя или пароль!";
-                return false;
-            }
+            //bool isLoginDetailsValid = Membership.IsValidLoginDetails(username, password);
+            //if (isLoginDetailsValid == false)
+            //{
+            //    message = "Неверное имя или пароль!";
+            //    return false;
+            //}
 
             bool isLoginSuccessfull = Membership.ValidateAndLogin(username, password);
             if (isLoginSuccessfull == false)
             {
-                message = "Ошибка при входе. Обратитесь к администратору!";
+                message = "Неверное имя или пароль!";// "Ошибка при входе. Обратитесь к администратору!";
                 return false;
             }
 

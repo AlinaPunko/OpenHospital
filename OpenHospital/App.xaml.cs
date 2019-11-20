@@ -22,7 +22,7 @@ namespace OpenHospital
             try
             {
                 con.Open();
-                MessageBox.Show("Open");
+                //MessageBox.Show("Open");
             }
             catch (Exception exp)
             {

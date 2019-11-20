@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OpenHospital.Data;
+using OpenHospital.Model;
 
 namespace OpenHospital.Tables
 {
@@ -23,53 +25,32 @@ namespace OpenHospital.Tables
         public Doctors()
         {
             InitializeComponent();
+            List<string> Cat = new List<string>();
+            Cat.Add("Первая");
+            Cat.Add("Вторая");
+            Cat.Add("Высшая");
+            Category.ItemsSource = Cat;
+            SelectAllDoctors();
         }
-        //public DoctorsPresenter Presenter { get; set; }
+
+        private void SelectAllDoctors()
+        {
+            
+            dataGridViewResult.ItemsSource= DoctorDataAccess.GetDoctors();
+            //throw new NotImplementedException();
+        }
+
         private void DoctorsForm_MouseDown(object sender, MouseButtonEventArgs e)
         {
             //if (e.ChangedButton == MouseButton.Left)
             //    this.DragMove();
         }
-        #region IDoctorsView Members
 
-        //public IEnumerable<Data.Doctor> Doctors
-        //{
-        //    set
-        //    {
-        //        this.dataGridViewResult.AutoGenerateColumns = false;
-        //        this.dataGridViewResult.DataContext = value;//datasource был
-        //    }
-        //}
-
-        //public string Message
-        //{
-        //    set
-        //    {
-
-        //        Message message = new Message(value);
-        //        message.Show();
-        //    }
-        //}
-
-        public string NameSearch
-        {
-            get
-            {
-                return Name.Text;
-            }
-            set
-            {
-                this.Name.Text = value;
-            }
-        }
-
-
-        #endregion
 
         private void buttonAdd_Click(object sender, RoutedEventArgs e)
         {
-            //var editDoctorForm = new EditDoctorForm(true);
-            //editDoctorForm.ShowDialog();
+            var editDoctor = new EditDoctor(true);
+            editDoctor.ShowDialog();
             //this.Presenter.LoadDoctorsByCriterias();
         }
 
@@ -92,43 +73,39 @@ namespace OpenHospital.Tables
 
         private void buttonEdit_Click(object sender, RoutedEventArgs e)
         {
-            //var selectedDoctor = this.GetSelectedDoctor();
-            //if (selectedDoctor == null)
-            //{
-            //    return;
-            //}
-
-            //int selectedDoctorId = selectedDoctor.DoctorID;
-            //var editDoctorForm = new EditDoctorForm(selectedDoctorId);
-            //editDoctorForm.ShowDialog();
+            var row = (System.Data.DataRowView)dataGridViewResult.SelectedItems[0];
+            var editDoctor = new EditDoctor(DoctorDataAccess.GetDoctorById(Convert.ToInt32(row.Row.ItemArray[0].ToString())));
+            editDoctor.ShowDialog();
             //this.Presenter.LoadDoctorsByCriterias();
         }
 
         private void buttonDelete_Click(object sender, RoutedEventArgs e)
         {
-            //var selectedDoctor = this.GetSelectedDoctor();
-            //if (selectedDoctor == null)
-            //{
-            //    return;
-            //}
+            var row = (System.Data.DataRowView)dataGridViewResult.SelectedItems[0];
+            if (row == null)
+            {
+                return;
+            }
 
-            //if (MessageBox.Show("Вы действительно хотите удалить этого врача?", "Подтверждение удаления", MessageBoxButton.OKCancel) != MessageBoxResult.OK)//messageboxresult System.Windows.Forms.DialogResult
-            //{
-            //    return;
-            //}
+            if (MessageBox.Show("Вы действительно хотите удалить этого доктора ? ", "Подтверждение удаления", MessageBoxButton.OKCancel) != MessageBoxResult.OK)//messageboxresult System.Windows.Forms.DialogResult
+            {
+                return;
+            }
 
-            //try
-            //{
-            //    int doctorId = selectedDoctor.DoctorID;
-            //    UsersDataAccess.DeleteUserByDoctorId(doctorId);
-            //    DoctorDataAccess.DeleteDoctorById(doctorId);
-            //    this.Presenter.LoadAllDoctors();
-            //}
-            //catch (Exception ex)
-            //{
-            //    string errorMessage = string.Format("При удалении объекта произошла ошибка!\n {0}", ex.Message);
-            //    this.Message = errorMessage;
-            //}
+            try
+            {
+                //var patient = (Patient)row;
+                //int patientId = patient.Id;
+                UsersDataAccess.DeleteUserByDoctorId(Convert.ToInt32(row.Row.ItemArray[0].ToString()));
+                //DoctorDataAccess.DeleteDoctorById(Convert.ToInt32(row.Row.ItemArray[0].ToString()));
+                
+
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = string.Format("При удалении объекта произошла ошибка!\n {0}", ex.Message);
+                //this.Message = errorMessage;
+            }
         }
 
         private void buttonChoose_Click(object sender, RoutedEventArgs e)
@@ -176,6 +153,11 @@ namespace OpenHospital.Tables
         private void textBoxSubject_TextChanged(object sender, TextChangedEventArgs e)
         {
             //this.Presenter.LoadDoctorsByCriterias();
+        }
+
+        private void Category_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

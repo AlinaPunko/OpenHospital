@@ -1,4 +1,9 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using OpenHospital.Data;
+using OpenHospital.Model;
+using OpenHospital.UserControls;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,32 +23,68 @@ namespace OpenHospital.Tables
     /// <summary>
     /// Логика взаимодействия для Patients.xaml
     /// </summary>
-    public partial class Patients : UserControl
+    public partial class Patients : UserControl//, IPatientsView
     {
         public Patients()
         {
             InitializeComponent();
+            
+            dataGridViewResult.ItemsSource = PatientsDataAccess.GetPatients();
         }
         private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             //this.Presenter.LoadPatientsByCriterias();
         }
-        //public PatientsPresenter Presenter { get; set; }
-        //public string NameSearch
-        //{
-        //    get
-        //    {
-        //        return textBoxName.Text;
-        //    }
-        //    set
-        //    {
-        //        this.textBoxName.Text = value;
-        //    }
-        //}
+        public string NameSearch
+        {
+            get
+            {
+                return Name.Text;
+            }
+            set
+            {
+                this.Name.Text = value;
+            }
+        }
+        public string AddressSearch
+        {
+            get
+            {
+                return Address.Text;
+            }
+            set
+            {
+                this.Address.Text = value;
+            }
+        }
+        public DateTime BirthdateSearchTo
+        {
+            get
+            {
+                return dateTimePickerTo.DisplayDate;
+            }
+            set
+            {
+                this.dateTimePickerTo.DisplayDate = value;
+            }
+        }
+        public DateTime BirthdateSearchFrom
+        {
+            get
+            {
+                return dateTimePickerFrom.DisplayDate;
+            }
+            set
+            {
+                this.dateTimePickerFrom.DisplayDate= value;
+            }
+        }
         private void buttonSearch_Click(object sender, RoutedEventArgs e)
         {
-            //string name = textBoxName.Text;
-            //this.Presenter.LoadPatientsByCriterias();//name);
+            string findname = Name.Text;
+            PatientsDataAccess.GetPatients().RowFilter = "name = "+findname;
+
+
         }
         private void PatientsForm_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -52,46 +93,37 @@ namespace OpenHospital.Tables
         }
         private void buttonEdit_Click(object sender, RoutedEventArgs e)
         {
+            var row = (System.Data.DataRowView)dataGridViewResult.SelectedItems[0];
             //var patient = GetSelectedPatient();
-            //if (patient == null)
-            //{
-            //    return;
-            //}
+            if (row == null)
+            {
+                return;
+            }
 
             //int patientId = patient.PatientID;
-            //EditPatientForm patientForm = new EditPatientForm(patientId);
-            //patientForm.ShowDialog();
-            //this.Presenter.LoadPatientsByCriterias();
+            EditPatient editpatient = new EditPatient(Convert.ToInt32(row.Row.ItemArray[0].ToString()));
+            MainWindow.AppWindow.ContentC.Content = editpatient;
+               // App..Current.MainWindow= editpatient;
         }
-        //private Patient GetSelectedPatient()
-        //{
-        //    var row = this.dataGridViewResult.SelectedItem;
-        //    if (row == null)
-        //    {
-        //        return null;
-        //    }
-
-        //    var patient = /*(Patient)*/row;
-        //    return patient;
-        //}
 
         private void buttonAdd_Click(object sender, RoutedEventArgs e)
         {
-            //EditPatientForm editpatientForm = new EditPatientForm(0);
-            //editpatientForm.ShowDialog();
-            //this.Presenter.LoadPatientsByCriterias();
+            
+            EditPatient editpatient = new EditPatient(/*0*/);
+            MainWindow.AppWindow.ContentC.Content = editpatient;
+            //((MainWindow)Application.Current.MainWindow).ContentC.Content = editpatient;
         }
 
         #region IPatientsView Members
 
-        //public IEnumerable<Patient> Patients
-        //{
-        //    set
-        //    {
-        //        this.dataGridViewResult.AutoGenerateColumns = false;
-        //        this.dataGridViewResult.DataContext = value;
-        //    }
-        //}
+        public IEnumerable/*<Patient>*/ PatientsList
+        {
+            set
+            {
+                this.dataGridViewResult.AutoGenerateColumns = false;
+                this.dataGridViewResult.DataContext = value;
+            }
+        }
 
         public string Message
         {
@@ -107,7 +139,7 @@ namespace OpenHospital.Tables
 
         private void buttonDelete_Click(object sender, RoutedEventArgs e)
         {
-            var row = this.dataGridViewResult.SelectedItem;
+            var row = (System.Data.DataRowView)dataGridViewResult.SelectedItems[0];
             if (row == null)
             {
                 return;
@@ -121,10 +153,10 @@ namespace OpenHospital.Tables
             try
             {
                 //var patient = (Patient)row;
-                //int patientId = patient.PatientID;
-                //PatientsDataAccess.DeletePatientById(patientId);
+                //int patientId = patient.Id;
+                PatientsDataAccess.DeletePatientById(Convert.ToInt32(row.Row.ItemArray[0].ToString()));
+                dataGridViewResult.ItemsSource = PatientsDataAccess.GetPatients();
 
-                //this.Presenter.LoadAllPatients();
             }
             catch (Exception ex)
             {
@@ -139,25 +171,19 @@ namespace OpenHospital.Tables
             //this.Close();
         }
 
-        public bool TryChoosePatient(/*out Patient patient*/)
+        public bool TryChoosePatient(out Patient patient)
         {
-            //patient = null;
-            //this.panelButtons.Visibility = Visibility.Hidden;//cкрывает кнопку false
-            //this.panelChooseButtons.Visibility = Visibility.Visible;//visible видимый
-            //this.ShowDialog();
-
-            //if (this.DialogResult != DialogResult)//.OK
-            //{
-            //    return false;
-            //}
-
-            //var selectedPatient = GetSelectedPatient();
-            //if (selectedPatient == null)
-            //{
-            //    return false;
-            //}
-
-            //patient = selectedPatient;
+            var row = (System.Data.DataRowView)dataGridViewResult.SelectedItems[0];
+            this.panelButtons.Visibility = Visibility.Hidden;//cкрывает кнопку false
+            this.panelChooseButtons.Visibility = Visibility.Visible;//visible видимый
+            if (row == null)
+            {
+                patient = null;
+                return false;
+            }
+            Patient selectedpatient = new Patient(Convert.ToInt32(row.Row.ItemArray[0]), row.Row.ItemArray[1].ToString()
+                , Convert.ToDateTime(row.Row.ItemArray[2]), row.Row.ItemArray[3].ToString(), row.Row.ItemArray[4].ToString());
+            patient = selectedpatient;
 
             return true;
         }

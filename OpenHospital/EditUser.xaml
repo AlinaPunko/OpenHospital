@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="Пользователь" Height="450"  Width="350" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" Background="Transparent" WindowStartupLocation="CenterScreen" >
 
-    <!--<Grid>
+    <Grid>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="35"/>
@@ -21,37 +21,35 @@
             <RowDefinition/>
             <RowDefinition Height="21"/>
             <RowDefinition Height="23"/>
-            <RowDefinition Height="115"/>
-            <RowDefinition Height="55"/>
+            <RowDefinition Height="170"/>
             <RowDefinition Height="57"/>
         </Grid.RowDefinitions>
-        <Rectangle RadiusX="15" RadiusY="15" Grid.ColumnSpan="3"  Grid.RowSpan="7" />
+        <Rectangle RadiusX="15" RadiusY="15" Grid.ColumnSpan="3"  Grid.RowSpan="6" />
 
         <Image Grid.Column="1" Name="img1" Source="/Resourses/doctor (2).png"  Grid.Row="1" Margin="76,0,64,0" />
         <Label Content="Данные Пользователя" HorizontalContentAlignment="Center" FontSize="22"  Grid.Column="1" Margin="23,26,23,0" />
 
         <Label x:Name="label6" Foreground="Black" Content="№." Grid.Column="1" Grid.Row="1" Margin="30,110,226,0" Grid.RowSpan="3"/>
         <Label x:Name="labelId" Foreground="Black" Content="0" Grid.Column="1"  Grid.Row="1" Margin="59,110,205,0" Grid.RowSpan="2"/>
-        <materialDesign:PackIcon Kind="Account" VerticalAlignment="Center" Foreground="Blue"  Height="26" Width="25" Grid.Column="1" Grid.Row="3" Margin="5,7,0,105" Grid.RowSpan="2"/>
-        <TextBox x:Name="textBoxName" TextWrapping="Wrap" BorderBrush="Blue" materialDesign:HintAssist.Hint="Имя" Foreground="Black"  Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="2" Height="34" VerticalAlignment="Bottom" Margin="35,0,34,105" Grid.RowSpan="3" />
+        <materialDesign:PackIcon Kind="Account" VerticalAlignment="Center" Foreground="Blue"  Height="26" Width="25" Grid.Column="1" Grid.Row="3" Margin="5,7,0,160" Grid.RowSpan="2"/>
+        <TextBox x:Name="textBoxName" TextWrapping="Wrap" BorderBrush="Blue" materialDesign:HintAssist.Hint="Имя" Foreground="Black" Grid.Column="1" Grid.Row="3" Height="34" VerticalAlignment="Bottom" Margin="35,0,34,149" Grid.ColumnSpan="2" Grid.RowSpan="2" />
 
-        <materialDesign:PackIcon Kind="Key" VerticalAlignment="Center" Foreground="Blue"  Height="24" Width="25" Grid.Column="1" Grid.Row="4" Margin="5,21,0,70"/>
-        <PasswordBox x:Name="Password1" BorderBrush="Blue" materialDesign:HintAssist.Hint="Пароль" Foreground="Black" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="4" Margin="35,5,34,70" />
+        <materialDesign:PackIcon Kind="Key" VerticalAlignment="Center" Foreground="Blue"  Height="24" Width="25" Grid.Column="1" Grid.Row="4" Margin="5,43,0,103"/>
+        <PasswordBox x:Name="Password" BorderBrush="Blue" materialDesign:HintAssist.Hint="Пароль" Foreground="Black" Grid.Column="1" Grid.Row="4" Margin="35,102,0,36" />
+        <materialDesign:PackIcon Kind="KeyChange" VerticalAlignment="Center" Foreground="Blue"  Grid.Column="1" Grid.Row="4" Height="24" Width="25" RenderTransformOrigin="0.419,0.8" Margin="5,105,0,41"/>
+        <PasswordBox x:Name="Password2" BorderBrush="Blue" materialDesign:HintAssist.Hint="Повторите пароль" Foreground="Black" Grid.Column="1" Grid.Row="4" Margin="36,43,34,95" Grid.ColumnSpan="2" />
+        <!--<ComboBox Name="Role" BorderBrush="Blue" materialDesign:HintAssist.Hint="Выберите роль" Margin="35,87,0,0" Grid.Column="1" Grid.Row="4" />
+        <materialDesign:PackIcon Kind="Doctor" VerticalAlignment="Center" Foreground="Blue"  Grid.Column="1" Grid.Row="4" Height="24" Width="25" RenderTransformOrigin="0.419,0.8" Margin="5,91,0,0"/>-->
 
-        <materialDesign:PackIcon Kind="KeyChange" VerticalAlignment="Center" Foreground="Blue"  Grid.Column="1" Grid.Row="4" Height="24" Width="25" RenderTransformOrigin="0.419,0.8" Margin="5,53,0,38"/>
-        <PasswordBox x:Name="Password2" BorderBrush="Blue" materialDesign:HintAssist.Hint="Повторите пароль" Foreground="Black" Grid.Column="1" Grid.Row="4" Margin="35,37,0,38" />
-        <ComboBox Name="Role" BorderBrush="Blue" materialDesign:HintAssist.Hint="Выберите роль" Margin="35,87,0,0" Grid.Column="1" Grid.Row="4" />
-        <materialDesign:PackIcon Kind="Doctor" VerticalAlignment="Center" Foreground="Blue"  Grid.Column="1" Grid.Row="4" Height="24" Width="25" RenderTransformOrigin="0.419,0.8" Margin="5,91,0,0"/>
-
-        <WrapPanel Grid.Column="1"  Grid.Row="6" Margin="0,0,0,19">
+        <WrapPanel Grid.Column="1"  Grid.Row="5" Margin="0,0,0,19">
             <Button x:Name="buttonSave" Content="Сохранить" ToolTip="Записать"  FontSize="18" Width="140" BorderBrush="#FF307CD6"  Click="buttonSave_Click" />
             <Button x:Name="buttonClose" Content="Отмена" ToolTip="Отменить и выйти" Style="{StaticResource MaterialDesignFlatButton}" Width="140" Height="30" FontFamily="Segoe UI Black"   FontSize="18" Foreground="Black"   Click="buttonClose_Click" />
         </WrapPanel>
-        <Label x:Name="labelMessage" HorizontalContentAlignment="Center" Foreground="Red" Content="" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="350" Grid.Row="5" Grid.ColumnSpan="3" Margin="0,19,0,0" />
+        <Label x:Name="labelMessage" HorizontalContentAlignment="Center" Foreground="Red" Content="" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="350" Grid.Row="4" Grid.ColumnSpan="3" Margin="0,134,0,0" />
         <Button x:Name="ButtonClose" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}" Click="buttonCancel_Click"  Grid.Column="2"  Foreground="Black" Height="Auto" Margin="0,0,0,41">
             <materialDesign:PackIcon Kind="Power"  Foreground="Black"/>
         </Button>
 
-    </Grid>-->
+    </Grid>
 
 </Window>

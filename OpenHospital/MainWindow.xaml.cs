@@ -1,4 +1,5 @@
 ﻿using OpenHospital.Tables;
+using OpenHospital.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,10 +23,12 @@ namespace OpenHospital
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static MainWindow AppWindow;
         public MainWindow()
         {
             InitializeComponent();
             UserName.Text = Membership.CurrentUser.Login.ToString();
+            AppWindow = this;
             //Time.Content = DateTime.Now.TimeOfDay;
             if (Membership.CurrentUser.RoleID == 2)
             {
@@ -64,41 +67,41 @@ namespace OpenHospital
                 case "ItemDoctors":
                     {
                         Doctors doctors = new Doctors();
-                        Content.Content = doctors;
+                        ContentC.Content = doctors;
                         break;
                     }
                 case "ItemPatients":
                     {
                         Patients patients = new Patients();
-                        Content.Content = patients;
+                        ContentC.Content = patients;
                         break;
                     }
                 case "ItemVisits":
                     {
                          Visits visits = new Visits();
-                         Content.Content = visits;
+                         ContentC.Content = visits;
                          break;
                     }
-            //    case "ItemAddDoctor":
-            //        {
-            //            EditDoctorForm newForm = new EditDoctorForm(true);
-            //            newForm.ShowDialog();
-            //            break;
-            //        }
-            //    case "ItemAddAdmin":
-            //        {
-            //            EditUserForm newForm = new EditUserForm(0);
-            //            newForm.ShowDialog();
-            //            break;
-            //        }
-            //    case "ItemAddPatient":
-            //        {
-            //            EditPatientForm newForm = new EditPatientForm(0);
-            //            newForm.ShowDialog();
-            //            break;
-            //        }
-            //    default:
-            //        break;
+                case "ItemAddDoctor":
+                    {
+                        EditDoctor newForm = new EditDoctor();
+                        newForm.ShowDialog();
+                        break;
+                    }
+                case "ItemAddAdmin":
+                    {
+                        EditUser newForm = new EditUser(0);
+                        newForm.ShowDialog();
+                        break;
+                    }
+                case "ItemAddPatient":
+                    {
+                        EditPatient editpatient = new EditPatient(/*0*/);
+                        MainWindow.AppWindow.ContentC.Content = editpatient;
+                        break;
+                    }
+                default:
+                    break;
             }
         }
 
