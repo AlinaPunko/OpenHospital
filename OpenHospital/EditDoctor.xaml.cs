@@ -23,7 +23,7 @@ namespace OpenHospital
     /// </summary>
     public partial class EditDoctor : Window//, IEditDoctorView 
     {
-        public Doctor Doctor { get; set; }
+        Doctor Doctor = new Doctor();
 
 
 
@@ -91,9 +91,7 @@ namespace OpenHospital
             else
             {
 
-//Message message = new Message("Проблема");
-                //message.Show();
-                // FillView();
+                MessageBox.Show("Проблема");
             }
         }
         public void Save1()
@@ -112,8 +110,7 @@ namespace OpenHospital
 
             else
             {
-                ////Message message = new Message("Проблема");
-                ////message.Show();
+                MessageBox.Show("Проблема");
             }
         }
 
@@ -134,7 +131,7 @@ namespace OpenHospital
             catch (Exception e)
             {
                 var message = String.Format("Ошибка хранилища!Позвоните администратору!/ n [0] ", e.Message);
-                //View.Message = message;
+                MessageBox.Show(message);
             }
 
         }
@@ -171,7 +168,7 @@ namespace OpenHospital
             catch (Exception e)
             {
                 string message = "Ошибка!:" + e.Message;
-              //  View.Message = message;
+                MessageBox.Show(message);
             }
         }
         public bool Flag = false;

@@ -36,7 +36,7 @@ namespace OpenHospital.Data
         // < returns ></ returns >
         public static User GetUserByName(string username)
         {
-            OracleCommand cmd = new OracleCommand("GetUserByName", App.con);
+            OracleCommand cmd = new OracleCommand("admin.GetUserByName", App.con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("username", username);
             OracleParameter user_par = new OracleParameter("prc", OracleDbType.RefCursor);
@@ -73,7 +73,7 @@ namespace OpenHospital.Data
         {
 
             User user = new User();
-            OracleCommand cmd = new OracleCommand("GetUserByID", App.con);
+            OracleCommand cmd = new OracleCommand("admin.GetUserByID", App.con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("userID", userId);
             OracleParameter user_par = new OracleParameter("prc", OracleDbType.RefCursor);
@@ -109,7 +109,7 @@ namespace OpenHospital.Data
             if (App.con.State == ConnectionState.Closed)
                 App.con.Open();
             User user = null;
-            OracleCommand cmd = new OracleCommand("Login", App.con);
+            OracleCommand cmd = new OracleCommand("admin.Login", App.con);
             cmd.CommandType = CommandType.StoredProcedure;
             OracleParameter user_par = new OracleParameter("prc", OracleDbType.RefCursor);
             cmd.Parameters.Add("username", username);
@@ -169,10 +169,10 @@ namespace OpenHospital.Data
             cmd.Parameters.Add("userpassword", user.Password);
             if (user.Doctor == null)
                 cmd.Parameters.Add("doctor", "");
-            else cmd.Parameters.Add("doctor", DoctorDataAccess.GetDoctorByName(user.Doctor.Name));
+            else cmd.Parameters.Add("doctor", (DoctorDataAccess.GetDoctorByName(user.Doctor.Name)).Id);
             if (user.Patient==null)
                 cmd.Parameters.Add("patient", "");
-            else cmd.Parameters.Add("patient", PatientsDataAccess.GetPatientByName(user.Patient.Name));
+            else cmd.Parameters.Add("patient",  (PatientsDataAccess.GetPatientByName(user.Patient.Name)).Id);
             cmd.Parameters.Add("role", user.RoleID);
            
             int res = cmd.ExecuteNonQuery();
@@ -216,7 +216,7 @@ namespace OpenHospital.Data
         {
             OracleCommand cmd = new OracleCommand("DeleteUserByDoctorId", App.con);
             cmd.CommandType = CommandType.StoredProcedure;
-            OracleParameter user_par = new OracleParameter("prc", OracleDbType.RefCursor);
+            //OracleParameter user_par = new OracleParameter("prc", OracleDbType.RefCursor);
             cmd.Parameters.Add("did", doctorId);
             
             var dt = cmd.ExecuteReader();
@@ -230,6 +230,7 @@ namespace OpenHospital.Data
             cmd.Parameters.Add("pid", patientId);
             
             var dt = cmd.ExecuteReader();
+            PatientsDataAccess.DeletePatientById(patientId);
         }
     }
 }

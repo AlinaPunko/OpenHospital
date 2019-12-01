@@ -32,13 +32,22 @@ namespace OpenHospital
             //Time.Content = DateTime.Now.TimeOfDay;
             if (Membership.CurrentUser.RoleID == 2)
             {
-                ItemDoctors.Visibility = Visibility.Collapsed;
-                ItemAddDoctor.Visibility = Visibility.Collapsed;
+                //ItemAddDoctor.Visibility = Visibility.Collapsed;
                 ItemAddAdmin.Visibility = Visibility.Collapsed;
-                ItemAddPatient.Visibility = Visibility.Collapsed;
+                //ItemAddPatient.Visibility = Visibility.Collapsed;
                 Doctorshex.Visibility = Visibility.Collapsed;
             }
-
+            if (Membership.CurrentUser.RoleID == 3)
+            {
+                ItemDoctors.Visibility = Visibility.Collapsed;
+                //ItemAddDoctor.Visibility = Visibility.Collapsed;
+                ItemAddAdmin.Visibility = Visibility.Collapsed;
+                //ItemAddPatient.Visibility = Visibility.Collapsed;
+                MyInfo.Text = "Обо мне";
+                ItemVisits.Visibility = Visibility.Collapsed;
+                Doctorshex.Visibility = Visibility.Collapsed;
+                
+            }
         }
 
         private void MainForm_MouseDown(object sender, MouseButtonEventArgs e)
@@ -72,8 +81,16 @@ namespace OpenHospital
                     }
                 case "ItemPatients":
                     {
-                        Patients patients = new Patients();
-                        ContentC.Content = patients;
+                        if (Membership.CurrentUser.RoleID == 3)
+                        {
+                            EditPatient editPatient = new EditPatient(Membership.CurrentUser.Patient.Id);
+                            ContentC.Content = editPatient;
+                        }
+                        else
+                        {
+                            Patients patients = new Patients();
+                            ContentC.Content = patients;
+                        }
                         break;
                     }
                 case "ItemVisits":
@@ -100,17 +117,24 @@ namespace OpenHospital
                         MainWindow.AppWindow.ContentC.Content = editpatient;
                         break;
                     }
+                case "Statistics":
+                    {
+                        Statistics item = new Statistics();
+                        MainWindow.AppWindow.ContentC.Content = item;
+                        break;
+                    }
                 default:
+
                     break;
             }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //Membership.LogOutUser();
-            //LoginForm loginForm = new LoginForm();
-            //loginForm.Show();
-            //this.Close();
+            Membership.LogOutUser();
+            LoginWindow loginForm = new LoginWindow();
+            loginForm.Show();
+            this.Close();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -121,6 +145,7 @@ namespace OpenHospital
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            App.con.Close();
             this.Close();
         }
 

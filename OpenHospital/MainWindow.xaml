@@ -78,17 +78,17 @@
                     <Image Height="60" VerticalAlignment="Bottom" />
                 </Grid>
 
-                <ListView x:Name="ListViewMenu" Foreground="#FF5C99D6" SelectionChanged="ListViewMenu_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                <ListView x:Name="ListViewMenu" Foreground="#FF5C99D6" SelectionChanged="ListViewMenu_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Height="260" >
                     <ListViewItem x:Name="ItemPatients" Height="50" >
                         <StackPanel Orientation="Horizontal" >
-                            <materialDesign:PackIcon Kind="Man" Height="25" Width="25" Foreground="Blue"/>
-                            <TextBlock Text="Пациенты" VerticalAlignment="Center" Margin="5 10" Foreground="Blue"/>
+                            <materialDesign:PackIcon  Kind="Man" Height="25" Width="25" Foreground="Blue"/>
+                            <TextBlock Text="Пациенты" Name="MyInfo" VerticalAlignment="Center" Margin="5 10" Foreground="Blue"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem x:Name="ItemVisits" Height="50" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Note" Height="25" Width="25" Foreground="Blue"/>
-                            <TextBlock Text="Визиты" ToolTip="Визиты" VerticalAlignment="Center" Margin="5 10" Foreground="Blue"/>
+                            <TextBlock  Text="Визиты" ToolTip="Визиты" VerticalAlignment="Center" Margin="5 10" Foreground="Blue"/>
                         </StackPanel>
                     </ListViewItem>
 
@@ -98,24 +98,14 @@
                             <TextBlock Text="Доктора" VerticalAlignment="Center"  Margin="5 10" Foreground="Blue"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemAddDoctor" Height="50" >
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="PersonAdd" ToolTip="Добавить доктора" Height="25" Width="25" Foreground="Blue"/>
-                            <TextBlock Text="Добавить  доктора" VerticalAlignment="Center"  Margin="5 10" Foreground="Blue"/>
-                        </StackPanel>
-                    </ListViewItem>
+                    
                     <ListViewItem x:Name="ItemAddAdmin" Height="50" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="PersonAddOutline" ToolTip="Добавить администратора" Height="25" Width="25" Foreground="Blue"/>
                             <TextBlock Text="Добавить администратора" VerticalAlignment="Center"  Margin="5 10" Foreground="Blue"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemAddPatient" Height="50" >
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Person" ToolTip="Добавить пациента" Height="25" Width="25" Foreground="Blue"/>
-                            <TextBlock Text="Добавить пациента" VerticalAlignment="Center"  Margin="5 10" Foreground="Blue"/>
-                        </StackPanel>
-                    </ListViewItem>
+                   
                     <ListViewItem x:Name="Statistics" Height="40" >
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="InfoCircle" ToolTip="Доктора" Height="25" Width="25" Foreground="Blue"/>

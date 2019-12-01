@@ -36,6 +36,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
@@ -96,6 +99,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converter.cs" />
     <Compile Include="Data\DoctorsDataAccess.cs" />
     <Compile Include="Data\PatientsDataAccess.cs" />
     <Compile Include="Data\StatisticsAccess.cs" />
@@ -120,6 +124,9 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\Visit.cs" />
     <Compile Include="Model\VisitType.cs" />
+    <Compile Include="ShowPhoto.xaml.cs">
+      <DependentUpon>ShowPhoto.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tables\Doctors.xaml.cs">
       <DependentUpon>Doctors.xaml</DependentUpon>
     </Compile>
@@ -163,6 +170,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resourses\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ShowPhoto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -241,6 +252,7 @@
     <Resource Include="Resourses\Pic3.jpg" />
     <Resource Include="Resourses\Pic4.jpg" />
     <Resource Include="Resourses\stethoscope.png" />
+    <Resource Include="icon.ico" />
     <Content Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

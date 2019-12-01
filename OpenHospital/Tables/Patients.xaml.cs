@@ -25,11 +25,19 @@ namespace OpenHospital.Tables
     /// </summary>
     public partial class Patients : UserControl//, IPatientsView
     {
+        private IEnumerable<Patient> collection;
+
         public Patients()
         {
             InitializeComponent();
             
             dataGridViewResult.ItemsSource = PatientsDataAccess.GetPatients();
+            if (Membership.CurrentUser.RoleID == 2)
+            {
+                buttonAdd.Visibility = Visibility.Collapsed;
+                buttonDelete.Visibility = Visibility.Collapsed;
+            }
+
         }
         private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
@@ -81,9 +89,19 @@ namespace OpenHospital.Tables
         }
         private void buttonSearch_Click(object sender, RoutedEventArgs e)
         {
-            string findname = Name.Text;
-            PatientsDataAccess.GetPatients().RowFilter = "name = "+findname;
-
+            collection = from t in PatientsDataAccess.GetPatients() select t;
+            if (!String.IsNullOrEmpty(Name.Text))
+            {
+                collection = from t in collection where t.Name.Contains(Name.Text) select t;
+            }
+            if (!String.IsNullOrEmpty(Address.Text))
+                collection = from t in collection where t.Address.Contains(Address.Text) select t;
+            if (dateTimePickerFrom.SelectedDate != null)
+                collection = from t in collection where t.Birthdate > BirthdateSearchFrom select t;
+            if (dateTimePickerTo.SelectedDate != null)
+                collection = from t in collection where t.Birthdate < BirthdateSearchTo select t;
+            dataGridViewResult.ItemsSource = collection;
+            return;
 
         }
         private void PatientsForm_MouseDown(object sender, MouseButtonEventArgs e)
@@ -93,7 +111,8 @@ namespace OpenHospital.Tables
         }
         private void buttonEdit_Click(object sender, RoutedEventArgs e)
         {
-            var row = (System.Data.DataRowView)dataGridViewResult.SelectedItems[0];
+            var row = (Patient)dataGridViewResult.SelectedItem;
+            //var row = (System.Data.DataRowView)dataGridViewResult.SelectedItems[0];
             //var patient = GetSelectedPatient();
             if (row == null)
             {
@@ -101,7 +120,7 @@ namespace OpenHospital.Tables
             }
 
             //int patientId = patient.PatientID;
-            EditPatient editpatient = new EditPatient(Convert.ToInt32(row.Row.ItemArray[0].ToString()));
+            EditPatient editpatient = new EditPatient(row.Id);
             MainWindow.AppWindow.ContentC.Content = editpatient;
                // App..Current.MainWindow= editpatient;
         }
@@ -114,32 +133,10 @@ namespace OpenHospital.Tables
             //((MainWindow)Application.Current.MainWindow).ContentC.Content = editpatient;
         }
 
-        #region IPatientsView Members
-
-        public IEnumerable/*<Patient>*/ PatientsList
-        {
-            set
-            {
-                this.dataGridViewResult.AutoGenerateColumns = false;
-                this.dataGridViewResult.DataContext = value;
-            }
-        }
-
-        public string Message
-        {
-            set
-            {
-
-                //Message message = new Message(value);
-                //message.Show();
-            }
-        }
-
-        #endregion
 
         private void buttonDelete_Click(object sender, RoutedEventArgs e)
         {
-            var row = (System.Data.DataRowView)dataGridViewResult.SelectedItems[0];
+            var row = (Patient)dataGridViewResult.SelectedItem;
             if (row == null)
             {
                 return;
@@ -154,14 +151,15 @@ namespace OpenHospital.Tables
             {
                 //var patient = (Patient)row;
                 //int patientId = patient.Id;
-                PatientsDataAccess.DeletePatientById(Convert.ToInt32(row.Row.ItemArray[0].ToString()));
+                UsersDataAccess.DeleteUserByPatientId(row.Id);
                 dataGridViewResult.ItemsSource = PatientsDataAccess.GetPatients();
 
             }
             catch (Exception ex)
             {
                 string errorMessage = string.Format("При удалении объекта произошла ошибка!\n {0}", ex.Message);
-                this.Message = errorMessage;
+                //this.Message = errorMessage;
+                MessageBox.Show(errorMessage);
             }
         }
 
@@ -174,8 +172,8 @@ namespace OpenHospital.Tables
         public bool TryChoosePatient(out Patient patient)
         {
             var row = (System.Data.DataRowView)dataGridViewResult.SelectedItems[0];
-            this.panelButtons.Visibility = Visibility.Hidden;//cкрывает кнопку false
-            this.panelChooseButtons.Visibility = Visibility.Visible;//visible видимый
+            //this.panelButtons.Visibility = Visibility.Hidden;//cкрывает кнопку false
+            //this.panelChooseButtons.Visibility = Visibility.Visible;//visible видимый
             if (row == null)
             {
                 patient = null;

@@ -26,11 +26,17 @@ namespace OpenHospital.Tables
         {
             InitializeComponent();
             List<string> Cat = new List<string>();
+            Cat.Add("");
             Cat.Add("Первая");
             Cat.Add("Вторая");
             Cat.Add("Высшая");
             Category.ItemsSource = Cat;
             SelectAllDoctors();
+            if(Membership.CurrentUser.RoleID!=1)
+            panelButtons.Visibility = Visibility.Collapsed;
+            //dataGridViewResult.AutoGenerateColumns = false;
+            //dataGridViewResult.Columns[1].Header.= "Name";
+                
         }
 
         private void SelectAllDoctors()
@@ -56,7 +62,27 @@ namespace OpenHospital.Tables
 
         private void buttonSearch_Click(object sender, RoutedEventArgs e)
         {
-            ////this.Presenter.LoadDoctorsByCriterias();
+            try
+            {
+                if (Category.SelectedItem != null && Category.SelectedItem.ToString()!="")
+                {
+
+                    dataGridViewResult.ItemsSource = DoctorDataAccess.GetDoctorsByCat(Category.SelectedItem.ToString());
+                    return;
+                }
+                if (!String.IsNullOrEmpty(Spec.Text))
+                {
+                    dataGridViewResult.ItemsSource = DoctorDataAccess.GetDoctorsBySpec(Spec.Text);
+                    return;
+                }
+                if(Category.SelectedItem.ToString()=="" && String.IsNullOrEmpty(Spec.Text))
+                    dataGridViewResult.ItemsSource = DoctorDataAccess.GetDoctors();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         //private Doctor GetSelectedDoctor()
@@ -97,14 +123,15 @@ namespace OpenHospital.Tables
                 //var patient = (Patient)row;
                 //int patientId = patient.Id;
                 UsersDataAccess.DeleteUserByDoctorId(Convert.ToInt32(row.Row.ItemArray[0].ToString()));
+                SelectAllDoctors();
                 //DoctorDataAccess.DeleteDoctorById(Convert.ToInt32(row.Row.ItemArray[0].ToString()));
-                
+
 
             }
             catch (Exception ex)
             {
                 string errorMessage = string.Format("При удалении объекта произошла ошибка!\n {0}", ex.Message);
-                //this.Message = errorMessage;
+                MessageBox.Show(errorMessage);
             }
         }
 

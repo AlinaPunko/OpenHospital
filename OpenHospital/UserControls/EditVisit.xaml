@@ -39,13 +39,13 @@
         <Label x:Name="VisitType" FontFamily="Segoe UI Black" FontSize="16" Content="Тип визита" Height="30" Margin="26,49,543,0" Width="100" Grid.Row="1"/>
         <Label x:Name="VisitRoom" FontFamily="Segoe UI Black" FontSize="16" Content="Кабинет" Height="30" Margin="355,49,236,0" Width="78" Grid.Row="1"/>
         <Label x:Name="labelDoctor" FontSize="16" Content="Врач" Grid.Row="2" Margin="0,27,152,0" Height="31" Width="54" Grid.Column="1"/>
-        <TextBox x:Name="textBoxDoctorName"  Grid.Column="1"  IsEnabled="False"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="Выберите врача!" Grid.Row="2" Margin="55,27,10,44"/>
+        <TextBox x:Name="textBoxDoctorName"  Grid.Column="1"    TextWrapping="Wrap" materialDesign:HintAssist.Hint="Выберите врача!" Grid.Row="2" Margin="55,27,10,44"/>
         <Label x:Name="label3" Content="*"  Foreground="Red" Grid.Row="2" Margin="181,32,0,0" Height="26" Width="25" RenderTransformOrigin="0.5,0.5" Grid.Column="1" />
         <Button x:Name="buttonLoadDoctor"  Grid.Column="1"   Content="Выбрать"  Height="Auto" ToolTip="Выбрать врача" Click="buttonLoadDoctor_Click" Grid.Row="2" Margin="33,73,33,0"/>
         <Label x:Name="labelPatient"  Content="Пациент" FontSize="18" Grid.Row="3" Margin="64,0,53,0" Width="89" Height="34" Grid.Column="1"/>
 
         <Label x:Name="label1" Content="Имя"  Foreground="Black" FontFamily="Segoe UI Black" FontSize="16" Grid.Row="4" Margin="0,13,161,0" Height="31" Width="45" Grid.Column="1"/>
-        <TextBox x:Name="textBoxPatientName" Grid.Column="1"  IsEnabled="False" TextWrapping="Wrap" materialDesign:HintAssist.Hint="Имя пациента" Foreground="Black" Margin="51,13,10,35" Grid.Row="4"/>
+        <TextBox x:Name="textBoxPatientName" Grid.Column="1"  TextWrapping="Wrap" materialDesign:HintAssist.Hint="Имя пациента" Foreground="Black" Margin="51,13,10,35" Grid.Row="4"/>
         <Label x:Name="label5" Content="*" Foreground="Red" Margin="181,15,5,0" Grid.Row="4" Height="32" Width="20" RenderTransformOrigin="0.5,0.5" Grid.Column="1" />
         <Button x:Name="buttonLoadPatient" Content="Выбрать"  Height="Auto" ToolTip="Выбрать пациента" Click="buttonLoadPatient_Click" Grid.Row="5" Margin="33,0" Grid.Column="1"/>
         <Label x:Name="labelScheduleDate" FontFamily="Segoe UI Black" FontSize="16" Content="Дата" Margin="26,1,581,0" Grid.Row="1" Width="62" Height="31"/>
@@ -62,11 +62,14 @@
         <TextBox x:Name="textBoxPrescription"  HorizontalAlignment="Left" Height="33" TextWrapping="Wrap"  VerticalAlignment="Top" Width="525" Margin="127,102,0,0" Grid.Row="2" Grid.RowSpan="2"/>
         <Label x:Name="labelNotes"  FontFamily="Segoe UI Black" FontSize="16" Content="Заметки" Margin="26,28,542,0" Grid.Row="4" Height="29" Width="101"/>
         <TextBox x:Name="textBoxNotes"  HorizontalAlignment="Left" Height="33" TextWrapping="Wrap"  VerticalAlignment="Top" Width="526" Margin="127,24,0,0" Grid.Row="4"/>
-        <StackPanel Margin="355,0,48,0" Grid.Row="5" Orientation="Horizontal">
-            <Button x:Name="buttonSave" Content="Сохранить" Click="buttonSave_Click" ToolTip="Записать консультацию" Height="35"  />
+        <StackPanel Margin="403,62,0,0" Grid.Row="4" Orientation="Horizontal" Grid.RowSpan="2">
+            <Button x:Name="buttonSave" Content="Сохранить" Click="buttonSave_Click" ToolTip="Записать визит" Height="35"  />
             <Button x:Name="buttonClose" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Отменить запись и выйти" Content="Отменить и закрыть" Height="Auto"   />
         </StackPanel>
-
+        <StackPanel Margin="10,62,271,0" Grid.Row="4" Orientation="Horizontal" Grid.RowSpan="2">
+            <Button x:Name="buttonAdd" Content="Добавить файл" Click="buttonAdd_Click" ToolTip="Добавить файл" Height="35" Margin="0,5" Width="140"  />
+            <Button x:Name="buttonShow" Style="{StaticResource MaterialDesignFlatButton}" Click="buttonShow_Click"  ToolTip="Показать файл" Content="Открыть файл" Height="Auto"   />
+        </StackPanel>
 
     </Grid>
 </UserControl>

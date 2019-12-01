@@ -26,10 +26,24 @@ namespace OpenHospital.UserControls
     public partial class EditPatient
     {
         bool Flag = false;
-        Patient patient;
+        Patient patient = new Patient();
         public EditPatient()
         {
             InitializeComponent();
+            if (Membership.CurrentUser.RoleID == 3)
+            {
+                //panel2.Visibility = Visibility.Collapsed;
+                buttonClose.Visibility = Visibility.Collapsed;
+                buttonSave.Visibility = Visibility.Collapsed;
+               
+            }
+            if (Membership.CurrentUser.RoleID == 2)
+            {
+                
+                buttonClose.Visibility = Visibility.Collapsed;
+                buttonSave.Visibility = Visibility.Collapsed;
+
+            }
             //this.Presenter = new EditPatientPresenter(this)
         }
 
@@ -61,70 +75,7 @@ namespace OpenHospital.UserControls
         {
             Save();
         }
-
-        #region Visits operations
-        private Visit GetSelectedVisit()
-        {
-            var row = this.dataGridViewVisits.SelectedItem;//currentrow было вместо колумна
-            if (row == null)
-            {
-                return null;
-            }
-
-            var visit = (Visit)row;//row.DataBoundItem;
-            return visit;
-        }
-
-        private void buttonAddVisit_Click(object sender, RoutedEventArgs e)
-        {
-            var editVisitForm = new EditVisit(0);
-            //editVisitForm.ShowDialog();
-            //this.Presenter.LoadVisit();
-        }
-
-        private void buttonEditVisit_Click(object sender, RoutedEventArgs e)
-        {
-            //var selectedVisit = this.GetSelectedVisit();
-            //if (selectedVisit == null)
-            //{
-            //    return;
-            //}
-
-            //int selectedVisitId = selectedVisit.VisitID;
-            //var editVisitForm = new EditVisit(selectedVisitId);
-            //editVisitForm.ShowDialog();
-            //this.Presenter.LoadVisit();
-        }
-
-        private void buttonDeleteVisit_Click(object sender, RoutedEventArgs e)
-        {
-            //var selectedVisit = this.GetSelectedVisit();
-            //if (selectedVisit == null)
-            //{
-            //    return;
-            //}
-
-            //if (MessageBox.Show("Вы действительно хотите удалить эту консультацию?", "Подтверждение удаления", MessageBoxButton.OKCancel) != MessageBoxResult.OK)//messageboxresult System.Windows.Forms.DialogResult
-            //{
-            //    return;
-            //}
-
-            //try
-            //{
-            //    int visitId = selectedVisit.VisitID;
-            //    VisitsDataAccess.DeleteVisitById(visitId);
-            //    this.Presenter.LoadVisit();
-            //}
-            //catch (Exception ex)
-            //{
-            //    string errorMessage = string.Format("При удалении объекта произошла ошибка!\n {0}", ex.Message);
-            //    this.Message = errorMessage;
-            //}
-        }
-
-        #endregion
-        
-      
+ 
         
 
        
@@ -207,8 +158,7 @@ namespace OpenHospital.UserControls
             }
             else
             {
-                //Message message = new Message("Проблема");
-                //message.Show();
+                MessageBox.Show("Проблема!");
             }
         }
 
@@ -237,9 +187,7 @@ namespace OpenHospital.UserControls
             catch (Exception e)
             {
                 var message = String.Format("Ошибка хранилища");
-                //Message message1 = new Message(message);
-                //message1.Show();
-                //View.Message = message;
+                MessageBox.Show(message);
             }
 
         }
@@ -263,14 +211,14 @@ namespace OpenHospital.UserControls
                 textBoxAddress.Text = patient.Address;
                 textBoxName.Text = patient.Name;
                 textBoxPhone.Text = patient.Phone;
-                dateTimePickerBirthdate.DisplayDate = patient.Birthdate;
+                dateTimePickerBirthdate.SelectedDate = patient.Birthdate;
                 dataGridViewVisits.ItemsSource= VisitsDataAccess.GetVisitsByPatientId(patientId);
                 Flag = true;
             }
             catch (Exception e)
             {
                 string message = "Ошибка!:" + e.Message;
-                //View.Message = message;
+                MessageBox.Show(message);
             }
         }
 
@@ -291,12 +239,12 @@ namespace OpenHospital.UserControls
             catch (Exception e)
             {
                 string message = "Ошибка при загрузке диагнозов для пациента!\n" + e.Message;
-               // View.Message = message;
+                MessageBox.Show(message);
             }
         }
         private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            var editVisitForm = new EditVisit(0);
+            var editVisitForm = new EditVisit();
             //editVisitForm.ShowDialog();
             //this.Presenter.LoadVisit();
             //this.Presenter.LoadConsultations();
@@ -308,13 +256,16 @@ namespace OpenHospital.UserControls
         }
         private void buttonPrint_Click(object sender, RoutedEventArgs e)
         {
-
-            string Text = "Имя " + textBoxName.Text.ToString() + "\r\nДата рождения " + dateTimePickerBirthdate.Text.ToString() + "\r\nТелефон "
+            try
+            {
+                string Text = "Имя " + textBoxName.Text.ToString() + "\r\nДата рождения " + dateTimePickerBirthdate.Text.ToString() + "\r\nТелефон "
                      + textBoxPhone.Text.ToString() + "\r\nАдрес " + textBoxAddress.Text.ToString() + "\r\n";
             Text += "ВИЗИТЫ\r\n";
-            foreach (ItemCollection v in dataGridViewVisits.Items)
+                int count = dataGridViewVisits.Items.Count;
+            for(int i =0; i<count; i++)
             {
-                Text += "Доктор " + v[0].ToString() + " дата и время " + v[2].ToString() + " тип " 
+                    var v = (System.Data.DataRowView)dataGridViewVisits.Items[i];
+                Text += "Доктор " + v[1].ToString() + " дата и время " + v[2].ToString() + " тип " 
                     + v[3].ToString() + " симптомы " + v[4].ToString() + " диагноз " + v[5].ToString()
                     + " назначения " + v[6].ToString() + " пометки " + v[7].ToString() + " кабинет " + v[8].ToString() + "\r\n";
             }
@@ -324,13 +275,11 @@ namespace OpenHospital.UserControls
             {
                 e1.Graphics.DrawString(Text, new Font("Times New Roman", 12), new SolidBrush(System.Drawing.Color.Black), new RectangleF(0, 0, p.DefaultPageSettings.PrintableArea.Width, p.DefaultPageSettings.PrintableArea.Height));
             };
-            try
-            {
                 p.Print();
             }
             catch (Exception ex)
             {
-                throw new Exception("Exception Occured While Printing", ex);
+                MessageBox.Show("Exception Occured While Printing " + ex.Message);
             }
         }
 

@@ -25,7 +25,7 @@
             <RowDefinition Height="106"/>
             <RowDefinition Height="118"/>
         </Grid.RowDefinitions>
-        <Rectangle  Grid.ColumnSpan="3"  Grid.RowSpan="5"    />
+        <Rectangle  Grid.ColumnSpan="3"  Grid.RowSpan="5"  RadiusX="15" RadiusY="15"   />
         <Button  Grid.Column="1" Grid.Row="1" Height="Auto" Background="Transparent" BorderBrush="Transparent" Click="Button_Click" Margin="34,0,26,0">
             <Image Name="img1" Source="Resourses/doctor (2).png"  />
         </Button>

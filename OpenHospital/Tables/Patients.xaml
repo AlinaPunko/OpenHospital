@@ -48,7 +48,7 @@
         <DatePicker x:Name="dateTimePickerTo" BorderBrush="Blue" materialDesign:HintAssist.Hint="До даты"  Height="30" 
                     VerticalAlignment="Bottom" Grid.Column="2" Margin="14,0,10,65" Grid.Row="1"    />
         <Button x:Name="buttonSearch" ToolTip="Искать доктора" Content="Поиск"  Click="buttonSearch_Click" Grid.Row="2" VerticalAlignment="Top" Grid.Column="2" Margin="21,18,14,0" />
-        <StackPanel Grid.Column="1" Grid.Row="2" x:Name="panelButtons" Orientation="Horizontal" Margin="325,0,35,25">
+        <StackPanel Grid.Column="1" Grid.Row="2" x:Name="panelButtons" Orientation="Horizontal" Margin="20,0,35,25">
             <Button x:Name="buttonEdit" Width="50"  Click="buttonEdit_Click" Style="{StaticResource MaterialDesignFloatingActionButton}"
                     ToolTip="Редактировать пациента" Height="50">
                 <materialDesign:PackIcon
@@ -57,25 +57,20 @@
                     Width="35" />
             </Button>
             <Button x:Name="buttonAdd"  Width="50" Click="buttonAdd_Click"  Style="{StaticResource MaterialDesignFloatingActionButton}"
-                ToolTip="Добавить пациента" Height="50" Margin="10,0,0,0" >
+                ToolTip="Добавить пациента" Height="50" Margin="30,0,0,0" >
                 <materialDesign:PackIcon
                 Kind="Add"
                 Height="35"
                 Width="35" />
             </Button>
             <Button x:Name="buttonDelete" Width="50" Click="buttonDelete_Click"  Style="{StaticResource MaterialDesignFloatingActionButton}"
-                ToolTip="Удалить пациента" Height="50"  Margin="150,0,0,0" >
+                ToolTip="Удалить пациента" Height="50"  Margin="350,0,0,0" >
                 <materialDesign:PackIcon
                 Kind="DeleteEmpty"
                 Height="35"
                 Width="35" />
             </Button>
         </StackPanel>
-        <StackPanel Name="panelChooseButtons" Orientation="Horizontal" Grid.ColumnSpan="2" Margin="10,256,363,10" Grid.Row="1" Grid.RowSpan="2">
-            <Button x:Name="buttonChoose" Content="Выбрать" FontSize="15" FontWeight="Bold" Width="150" Height="40" 
-                    Click="buttonChoose_Click"  ToolTip="Выбрать доктора" Margin="0,14,0,13"/>
-            <Button x:Name="buttonCancel" Style="{StaticResource MaterialDesignFlatButton}" Content="Отменить" FontSize="15"
-                    FontWeight="Bold" Width="150" Click="buttonCancel_Click"  ToolTip="Отменить и выйти" Height="40" Margin="0,14,0,13"/>
-        </StackPanel>
+       
     </Grid>
 </UserControl>

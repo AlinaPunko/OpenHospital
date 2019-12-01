@@ -11,11 +11,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MessageBox = System.Windows.MessageBox;
+using UserControl = System.Windows.Controls.UserControl;
 
 namespace OpenHospital.UserControls
 {
@@ -24,62 +27,26 @@ namespace OpenHospital.UserControls
     /// </summary>
     public partial class EditVisit : UserControl
     {
-        public Visit Visit { get; set; }
+        public Visit Visit = new Visit();
+        public Doctor doctor = new Doctor();
+        public Patient patient = new Patient();
         bool Flag = false;
 
         
         protected void FillView()
         {
-            if (Membership.CurrentUser.RoleID == 2)
-            {
-                int ID = Membership.CurrentUser.Doctor.Id;
-                Doctor doctor = DoctorDataAccess.GetDoctorById(ID);
-                Visit.Doctor = doctor;
-                //View.DoctorId = doctor.DoctorID;
-                textBoxDoctorName.Text = doctor.Name;
-                //textBoxDoctorName.
-            }
-            else if (Membership.CurrentUser.RoleID == 3)
-            {
-                int ID = Membership.CurrentUser.Patient.Id;
-                Patient patient = PatientsDataAccess.GetPatientById(ID);
-                Visit.Patient = patient;
-                textBoxDoctorName.Text = patient.Name;
-            }
-                else
-            {
-                int doctorId = Visit.Doctor!=null ? Visit.Doctor.Id : 1;
-                //View.DoctorId = doctorId;
-                var consultationDoctor = DoctorDataAccess.GetDoctorById(doctorId);
-                if (consultationDoctor != null)
-                {
-                    textBoxDoctorName.Text = consultationDoctor.Name;
-                }
-                else
-                {
-                    textBoxDoctorName.Text = "Не выбран врач";
-                }
-            }
-
-            int patientId = Visit.Patient != null ? Visit.Patient.Id : 1;
-            //View.PatientId = patientId;
-            var consultationPatient = PatientsDataAccess.GetPatientById(patientId);
-            if (consultationPatient != null)
-            {
-                //View.PatientName = consultationPatient.Name;
-            }
-            else
-            {
-                //View.PatientName = "Не выбран пациент";
-            }
-
-            //DateTime scheduleDate = Visit.VisitDate.HasValue ? Visit.VisitDate.Value : DateTime.Now;
-            //View.VisitDate = scheduleDate;
-
-            //View.Notes = Visit.Notes;
-            //View.Reason = Visit.Reason;
-            //View.Prescription = Visit.Prescription;
-            //View.VisitId = Visit.VisitID;
+           
+            textBoxDiagnosis.Text = Visit.Diagnosis;
+            textBoxPrescription.Text = Visit.Prescription;
+            textboxRoom.Text = Visit.Room.Number;
+            textBoxNotes.Text = Visit.Notes;
+            textBoxSymptoms.Text = Visit.Symthoms;
+            dateTimePickerVisitDate.SelectedDate= Visit.DateTime.Date;
+            dateTimePickerVisitTime.SelectedTime =Convert.ToDateTime( Visit.DateTime.TimeOfDay.ToString());
+            textBoxPatientName.Text = Visit.Patient.Name;
+            textBoxDoctorName.Text = Visit.Doctor.Name;
+            if (Visit.file == null)
+                buttonShow.Visibility = Visibility.Hidden;
         }
 
         protected bool IsValid()
@@ -99,12 +66,12 @@ namespace OpenHospital.UserControls
             message = string.Empty;
             bool isValid = true;
 
-            if (!String.IsNullOrEmpty(dateTimePickerVisitDate.DisplayDate.ToString()))
+            if (String.IsNullOrEmpty(dateTimePickerVisitDate.DisplayDate.ToString()))
             {
                 message += String.Format("Поле '{0}' пусто!\n", "Дата");
                 isValid = false;
             }
-            if (!String.IsNullOrEmpty(dateTimePickerVisitTime.ToString()))
+            if (String.IsNullOrEmpty(dateTimePickerVisitTime.ToString()))
             {
                 message += String.Format("Поле '{0}' пусто!\n", "Время");
                 isValid = false;
@@ -139,8 +106,14 @@ namespace OpenHospital.UserControls
             bool isValid = IsValid();
             if (isValid)
             {
+                Visit.Diagnosis = textBoxDiagnosis.Text;
+                Visit.Prescription = textBoxPrescription.Text;
+                Visit.Symthoms = textBoxSymptoms.Text;
+                Visit.DateTime = dateTimePickerVisitDate.SelectedDate.Value.AddHours(dateTimePickerVisitTime.SelectedTime.Value.Hour).AddMinutes(dateTimePickerVisitTime.SelectedTime.Value.Minute); ;
+                Visit.Notes = textBoxNotes.Text;
+                Visit.Room = new Room(textboxRoom.Text, null);
+                Visit.Type = VisitsDataAccess.GetTypeByName(Type.SelectedValue.ToString());
                 SaveModel(Visit);
-                //FillView();
             }
         }
 
@@ -161,7 +134,7 @@ namespace OpenHospital.UserControls
             catch (Exception e)
             {
                 var message = String.Format("Ошибка хранилища! Позвоните администратору!/n {0} ", e.Message);
-                //View.Message = message;
+                MessageBox.Show(message);
             }
 
         }
@@ -183,32 +156,34 @@ namespace OpenHospital.UserControls
             //this.FillView();
         }
 
-        public void Load(int visitId)
+        public void Load(int visit)
         {
             try
             {
-                if (visitId == 0)
+                if (visit==0)
                 {
-                    throw new ArgumentNullException("visitId должен отличаться от 0!");
+                    throw new ArgumentNullException("visit должен отличаться от 0!");
                 }
-                //var visit = VisitsDataAccess.GetVisit(visitId);
-                //this.Visit = visit;
+                Visit = VisitsDataAccess.GetVisitByID(visit);
                 this.FillView();
             }
             catch (Exception e)
             {
                 string message = "Ошибка!:" + e.Message;
-                //View.Message = message;
+                MessageBox.Show(message);
             }
         }
         public EditVisit()
         {
+            InitializeComponent();
+            Visit.Patient = patient;
+            Visit.Doctor = doctor;
             List<string> data = new List<string>();
             data.Add("Первичный");
             data.Add("Вторичный");
             data.Add("Обследование");
             Type.ItemsSource = data;
-            InitializeComponent();            
+
             //this.Presenter = new EditVisitPresenter(this);
             if (Membership.CurrentUser.RoleID == 2)
             {
@@ -223,47 +198,60 @@ namespace OpenHospital.UserControls
             }
 
         }
-        public EditVisit(int visitId)
+        public EditVisit(int visitid)
             : this()
         {
-            if (visitId == 0)
+            if (visitid == 0)
             {
-                //CreateNew();
+                CreateNew();
             }
             else
             {
-                //Load(visitId);
+                Load(visitid);
+                Flag = true;
             }
 
         }
 
-       
+
 
         private void buttonSave_Click(object sender, RoutedEventArgs e)
         {
-            //Save();
+
+            Save();
         }
 
         private void buttonLoadPatient_Click(object sender, RoutedEventArgs e)
         {
-            //var patientsForm = new Patients();
-            //Patient loadedPatient;
-            //if (patientsForm.TryChoosePatient(out loadedPatient))
-            //{
-            //    this.PatientId = loadedPatient.PatientID;
-            //    this.PatientName = loadedPatient.Name;
-            //}
+            Visit.Patient = PatientsDataAccess.GetPatientByName(textBoxPatientName.Text);
+            if (Visit.Patient != null)
+                MessageBox.Show("Пациент найден");
+            else MessageBox.Show("Пациент не найден, попробуйте еще раз");
         }
 
         private void buttonLoadDoctor_Click(object sender, RoutedEventArgs e)
         {
-            //var doctors = new Doctors();
-            //Doctor loadedDoctor;
-            //if (doctors.TryChooseDoctor(out loadedDoctor))
-            //{
-            //    this.DoctorId = loadedDoctor.DoctorID;
-            //    this.DoctorName = loadedDoctor.Name;
-            //}
+            Visit.Doctor = DoctorDataAccess.SelectDoctorByName(textBoxDoctorName.Text);
+            if (Visit.Patient != null)
+                MessageBox.Show("Доктор найден");
+            else MessageBox.Show("Доктор не найден, попробуйте еще раз");
+        }
+        private void buttonAdd_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.InitialDirectory = "";
+            dlg.Filter = "Image files (*.jpg,*.png,*.bmp)|*.jpg;*.png;*.bmp|All Files (*.*)|*.*";
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                string selectedFileName = dlg.FileName;
+                Visit.file= Converter.ConvertImageToByteArray(selectedFileName);
+
+            }
+        }
+        private void buttonShow_Click(object sender, RoutedEventArgs e)
+        {
+            ShowPhoto showPhoto = new ShowPhoto(Visit.file);
+            showPhoto.ShowDialog();
         }
     }
 }

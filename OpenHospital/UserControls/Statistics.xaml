@@ -9,19 +9,18 @@
         mc:Ignorable="d"
         Height="400" Width="875"  Background="Transparent" >
     <Grid Background="white">
-        <Label FontSize="20" Margin="10,10,733,0">Всего врачей</Label>
-        <Label FontSize="20" Margin="10,52,645,0" Width="220">Всего специальностей</Label>
-        <Label FontSize="20" Margin="10,94,605,0" Width="260">Врачей высшей категории</Label>
-        <Label FontSize="20" Margin="10,136,605,0" Width="260">Врачей первой категории</Label>
-        <Label FontSize="20" Margin="10,173,605,0" Width="260">Врачей второй категории</Label>
-        <Label FontSize="20" Margin="10,210,605,0" Width="260">Кабинетов</Label>
-        <Label FontSize="20" Margin="10,247,605,0" Width="260">Пациентов</Label>
-        <Label FontSize="20" Margin="10,289,510,0" Width="355">Больше всего врачей специальности</Label>
-        <Label FontSize="20" Margin="485,20,130,0" Width="260">Всего визитов</Label>
-        <Label FontSize="20" Margin="485,62,130,0" Width="260">Визитов за текущий месяц</Label>
-        <Label FontSize="20" Margin="485,104,70,0" Width="320">Несовершеннолетних пациентов</Label>
-        <Label FontSize="20" Margin="485,146,130,0" Width="260">Пожилых пациентов</Label>
-        <Label FontSize="20" Margin="10,331,480,0" Width="385">Меньше всего врачей специальности</Label>
-
+        <TextBox Name="Doctors" Text="Всего врачей " FontSize="20" Margin="10,10,555,353"></TextBox>
+        <TextBox Name="Specialities" Text="Всего специальностей " FontSize="20" Margin="485,138,0,202"/>
+        <TextBox Name="Highest" Text="Врачей высшей категории " FontSize="20" Margin="10,248,555,97"/>
+        <TextBox Name="First" Text="Врачей первой категории " FontSize="20" Margin="10,203,555,152"/>
+        <TextBox Name="Second" Text="Врачей второй категории " FontSize="20" Margin="10,148,555,202"/>
+        <TextBox Name="Rooms" Text="Кабинетов " FontSize="20" Margin="10,103,555,257"/>
+        <TextBox Name="Patients" Text="Пациентов " FontSize="20" Margin="10,57,555,306"/>
+        <TextBox Name="Visits" Text="Всего визитов " FontSize="20" Margin="485,198,0,152"/>
+        <TextBox Name="VisitsMonth" Text="Визитов за текущий месяц " FontSize="20" Margin="485,93,0,257"/>
+        <TextBox Name="Childen" Text="Несовершеннолетних пациентов " FontSize="20" Margin="485,44,0,306"/>
+        <TextBox Name="Old" Text="Пожилых пациентов " FontSize="20" Margin="485,0,0,353"/>
+        <Button Name="XMLexport" Content="XML экcпорт" Click="XMLexport_Click" Margin="485,282,220,86"></Button>
+        <Button Name ="XMLImport" Content="XML импорт" Click="XMLImport_Click" Margin="700,282,10,86"></Button>
     </Grid>
 </UserControl>

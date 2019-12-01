@@ -11,11 +11,54 @@ namespace OpenHospital.Data
 {
     public class DoctorDataAccess
     {
+        public static DataView GetDoctorsBySpec(string spec)
+        {
+            OracleCommand cmd = new OracleCommand("admin.selectdoctorsbyspec", App.con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("spec", spec);
+            OracleParameter user_par = new OracleParameter("prc", OracleDbType.RefCursor);
+            cmd.Parameters.Add(user_par).Direction = System.Data.ParameterDirection.Output;
+            var reader = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(reader);
+            // return dt.AsEnumerable();
+            //DataView dataView = dt.AsDataView(); 
+            return dt.AsDataView();
+        }
+        public static DataView GetDoctorsByCat(string cat)
+        {
+            OracleCommand cmd = new OracleCommand("admin.selectdoctorsbycat", App.con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("cat", cat);
+            OracleParameter user_par = new OracleParameter("prc", OracleDbType.RefCursor);
+            cmd.Parameters.Add(user_par).Direction = System.Data.ParameterDirection.Output;
+            var reader = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(reader);
+            // return dt.AsEnumerable();
+            //DataView dataView = dt.AsDataView(); 
+            return dt.AsDataView();
+        }
+
+        public static DataView FindDoctorByName(string dname)
+        {
+            OracleCommand cmd = new OracleCommand("admin.finddoctorsbyname", App.con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("dname", "%"+dname+"%");
+            OracleParameter user_par = new OracleParameter("prc", OracleDbType.RefCursor);
+            cmd.Parameters.Add(user_par).Direction = System.Data.ParameterDirection.Output;
+            var reader = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(reader);
+            // return dt.AsEnumerable();
+            //DataView dataView = dt.AsDataView(); 
+            return dt.AsDataView();
+        }
         public static DataView GetDoctors()
         {
             OracleCommand cmd = new OracleCommand("GetAllDoctors", App.con);
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "Select * from SELECTALLDOCTORS";
+            cmd.CommandText = "Select * from Admin.SELECTALLDOCTORS";
             OracleDataReader reader = cmd.ExecuteReader();
             DataTable dt = new DataTable();
             dt.Load(reader);
@@ -27,7 +70,7 @@ namespace OpenHospital.Data
         public static Doctor GetDoctorById(int doctorId)
         {
             Doctor doctor = new Doctor();
-            OracleCommand cmd = new OracleCommand("GetDoctorByID", App.con);
+            OracleCommand cmd = new OracleCommand("admin.GetDoctorByID", App.con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("did", doctorId);
             OracleParameter user_par = new OracleParameter("prc", OracleDbType.RefCursor);
@@ -48,7 +91,7 @@ namespace OpenHospital.Data
 
         public static void InsertDoctor(Doctor doctor)
         {
-            OracleCommand cmd = new OracleCommand("Adddoctor", App.con);
+            OracleCommand cmd = new OracleCommand("admin.Adddoctor", App.con);
             cmd.CommandType = CommandType.StoredProcedure;
             //OracleParameter user_par = new OracleParameter("prc", OracleDbType.RefCursor);
             cmd.Parameters.Add("doctorname", doctor.Name);
@@ -93,7 +136,7 @@ namespace OpenHospital.Data
 
         public static void UpdateDoctor(Doctor doctor)
         {
-            OracleCommand cmd = new OracleCommand("Updatedoctor", App.con);
+            OracleCommand cmd = new OracleCommand("admin.Updatedoctor", App.con);
             cmd.CommandType = CommandType.StoredProcedure;
             //OracleParameter user_par = new OracleParameter("prc", OracleDbType.RefCursor);
             cmd.Parameters.Add("doctorid", doctor.Id);
@@ -108,7 +151,7 @@ namespace OpenHospital.Data
         public static Doctor SelectDoctorByName(string dname)
         {
             Doctor doctor = new Doctor();
-            OracleCommand cmd = new OracleCommand("SelectDoctorsByName", App.con);
+            OracleCommand cmd = new OracleCommand("admin.SelectDoctorsByName", App.con);
             cmd.CommandType = CommandType.StoredProcedure;
             OracleParameter user_par = new OracleParameter("prc", OracleDbType.RefCursor);
             cmd.Parameters.Add("dname", dname);
@@ -129,7 +172,7 @@ namespace OpenHospital.Data
 
         public static void DeleteDoctorById(int doctorId)
         {
-            OracleCommand cmd = new OracleCommand("DeleteDoctor", App.con);
+            OracleCommand cmd = new OracleCommand("admin.DeleteDoctor", App.con);
             cmd.CommandType = CommandType.StoredProcedure;
             //OracleParameter user_par = new OracleParameter("prc", OracleDbType.RefCursor);
             cmd.Parameters.Add("doctorID", doctorId);
@@ -137,9 +180,11 @@ namespace OpenHospital.Data
             var dt = cmd.ExecuteNonQuery();
         }
 
-        public static int GetDoctorByName(string name)
+
+        public static Doctor GetDoctorByName(string name)
         {
-            OracleCommand cmd = new OracleCommand("GetDoctorsByName", App.con);
+            Doctor doctor = new Doctor();
+            OracleCommand cmd = new OracleCommand("admin.GetDoctorsByName", App.con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("dname", name);
             OracleParameter user_par = new OracleParameter("prc", OracleDbType.RefCursor);
@@ -147,9 +192,14 @@ namespace OpenHospital.Data
             var dt = cmd.ExecuteReader();
             if (dt.Read())
             {
-                return Convert.ToInt32(dt["id"].ToString());
+                doctor.Id = Convert.ToInt32(dt[0].ToString());
+                doctor.Name = dt[1].ToString();
+                doctor.Address = dt[2].ToString();
+                doctor.Phone = dt[3].ToString();
+                doctor.Category1 = new Category(SelectCatIdByCat(dt[4].ToString()), dt[4].ToString());
+                doctor.Specialization1 = new Specialization(SelectSpecIdByName(dt[5].ToString()), dt[5].ToString());
             }
-            else return 0;
+            return doctor;
         }
 
     }

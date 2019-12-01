@@ -103,7 +103,7 @@ namespace OpenHospital
             {
                 var message = String.Format("Ошибка хранилища!Позвоните администратору!/ n {0} ",
                     e.Message);
-                labelMessage.Content = message;
+                MessageBox.Show(message);
             }
 
         }
@@ -149,6 +149,7 @@ namespace OpenHospital
             catch (Exception e)
             {
                 string message = "Ошибка!:" + e.Message;
+                MessageBox.Show(message);
             }
         }
         public EditUser(int userId)

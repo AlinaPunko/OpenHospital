@@ -10,47 +10,104 @@ namespace OpenHospital.Data
 {
     class StatisticsAccess
     {
-        public static int countdoctors()
+        public static string countdoctors()
         {
-            OracleCommand cmd = new OracleCommand("CountDoctors", App.con);
+            OracleCommand cmd = new OracleCommand("admin.CountDoctors", App.con);
             cmd.CommandType = CommandType.StoredProcedure;
             OracleParameter countd = new OracleParameter("countd", OracleDbType.Int32);
             cmd.Parameters.Add(countd).Direction = System.Data.ParameterDirection.Output;
-            var dt = cmd.ExecuteReader();
-            return countd;
+            var dt = cmd.ExecuteNonQuery();
+            return cmd.Parameters["countd"].Value.ToString();
         }
-        public static int countpatients()
+        public static string countpatients()
         {
-
+            OracleCommand cmd = new OracleCommand("admin.CountPatients", App.con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            OracleParameter countd = new OracleParameter("counth", OracleDbType.Int32);
+            cmd.Parameters.Add(countd).Direction = System.Data.ParameterDirection.Output;
+            var dt = cmd.ExecuteNonQuery();
+            return cmd.Parameters["counth"].Value.ToString();
         }
-        public static int countspec()
+        public static string countspec()
         {
-
+            OracleCommand cmd = new OracleCommand("admin.CountSpec", App.con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            OracleParameter countd = new OracleParameter("counts", OracleDbType.Int32);
+            cmd.Parameters.Add(countd).Direction = System.Data.ParameterDirection.Output;
+            var dt = cmd.ExecuteNonQuery();
+            return cmd.Parameters["counts"].Value.ToString();
         }
-        public static int countvisits()
+        public static string countvisits()
         {
-
+            OracleCommand cmd = new OracleCommand("admin.CountVisits", App.con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            OracleParameter countd = new OracleParameter("counth", OracleDbType.Int32);
+            cmd.Parameters.Add(countd).Direction = System.Data.ParameterDirection.Output;
+            var dt = cmd.ExecuteNonQuery();
+            return cmd.Parameters["counth"].Value.ToString();
         }
-        public static int visitslastmonth()
+        public static string visitslastmonth()
         {
-
+            OracleCommand cmd = new OracleCommand("Countvisitsbymonth", App.con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            OracleParameter countd = new OracleParameter("counth", OracleDbType.Int32);
+            cmd.Parameters.Add(countd).Direction = System.Data.ParameterDirection.Output;
+            var dt = cmd.ExecuteNonQuery();
+            return countd.Value.ToString();
         }
-        public static int countrooms()
+        public static string countrooms()
         {
-
+            OracleCommand cmd = new OracleCommand("CountRooms", App.con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            OracleParameter countd = new OracleParameter("counth", OracleDbType.Int32);
+            cmd.Parameters.Add(countd).Direction = System.Data.ParameterDirection.Output;
+            var dt = cmd.ExecuteNonQuery();
+            return countd.Value.ToString();
         }
-        public static int counthigh()
+        public static string counthigh()
         {
-
+            OracleCommand cmd = new OracleCommand("Counthigh", App.con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            OracleParameter countd = new OracleParameter("counth", OracleDbType.Int32);
+            cmd.Parameters.Add(countd).Direction = System.Data.ParameterDirection.Output;
+            var dt = cmd.ExecuteNonQuery();
+            return countd.Value.ToString();
         }
-        public static int countfirst()
+        public static string countfirst()
         {
-
+            OracleCommand cmd = new OracleCommand("CountFirst", App.con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            OracleParameter countd = new OracleParameter("counth", OracleDbType.Int32);
+            cmd.Parameters.Add(countd).Direction = System.Data.ParameterDirection.Output;
+            var dt = cmd.ExecuteNonQuery();
+            return countd.Value.ToString();
         }
-        public static int countsecond()
+        public static string countsecond()
         {
-
+            OracleCommand cmd = new OracleCommand("CountSecond", App.con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            OracleParameter countd = new OracleParameter("counth", OracleDbType.Int32);
+            cmd.Parameters.Add(countd).Direction = System.Data.ParameterDirection.Output;
+            var dt = cmd.ExecuteNonQuery();
+            return countd.Value.ToString();
         }
-
+        public static string countchildren()
+        {
+            OracleCommand cmd = new OracleCommand("Countinfants", App.con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            OracleParameter countd = new OracleParameter("counth", OracleDbType.Int32);
+            cmd.Parameters.Add(countd).Direction = System.Data.ParameterDirection.Output;
+            var dt = cmd.ExecuteNonQuery();
+            return countd.Value.ToString();
+        }
+        public static string countretiree()
+        {
+            OracleCommand cmd = new OracleCommand("Countretiree", App.con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            OracleParameter countd = new OracleParameter("counth", OracleDbType.Int32);
+            cmd.Parameters.Add(countd).Direction = System.Data.ParameterDirection.Output;
+            var dt = cmd.ExecuteNonQuery();
+            return countd.Value.ToString();
+        }
     }
 }

@@ -54,7 +54,7 @@
                         <DataGridTextColumn Header="Врач"  Width="auto" Binding="{Binding Path=Doctor.Name}"></DataGridTextColumn>
                     </DataGrid.Columns>-->
                 </DataGrid>
-                <WrapPanel x:Name="panel2" Margin="86,320,0,20" HorizontalAlignment="Left" Width="580">
+                <!--<WrapPanel x:Name="panel2" Margin="86,320,0,20" HorizontalAlignment="Left" Width="580">
                     <Button x:Name="buttonEditVisit"  Width="50" Click="buttonEditVisit_Click" Style="{StaticResource MaterialDesignFloatingActionButton}"
                                     ToolTip="Редактировать выбранную консультацию" Height="50" Margin="10 0">
                         <materialDesign:PackIcon Kind="TableEdit" Height="35" Width="35" />
@@ -67,7 +67,7 @@
                                     ToolTip="Добавить диагноз" Height="50">
                         <materialDesign:PackIcon Kind="Plus" Height="35" Width="35" />
                     </Button>
-                </WrapPanel>
+                </WrapPanel>-->
             </Grid>
         </StackPanel>
 
