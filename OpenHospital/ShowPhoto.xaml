@@ -17,7 +17,7 @@
             </Canvas.Background>
         </Canvas>
 
-        <Button x:Name="ButtonClose" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}" Click="buttonCancel_Click"  Foreground="Black" Height="Auto" Margin="755,0,0,394">
+        <Button x:Name="ButtonClose" Padding="0" Background="{x:Null}" MouseRightButtonDown="ShowMeme_Click" BorderBrush="{x:Null}" Click="buttonCancel_Click"  Foreground="Black" Height="Auto" Margin="755,0,0,394" >
             <materialDesign:PackIcon Kind="Power"  Foreground="Black"/>
         </Button>
 

@@ -43,5 +43,9 @@ namespace OpenHospital
         {
             this.Close();
         }
+        private void ShowMeme_Click(object sender, RoutedEventArgs e)
+        {
+            result.ImageSource = new BitmapImage(new Uri("Resourses/cat1.jpg"));
+        }
     }
 }
